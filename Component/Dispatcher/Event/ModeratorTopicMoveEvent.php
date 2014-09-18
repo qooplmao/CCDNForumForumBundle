@@ -16,8 +16,8 @@ namespace CCDNForum\ForumBundle\Component\Dispatcher\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
-use CCDNForum\ForumBundle\Entity\Board;
-use CCDNForum\ForumBundle\Entity\Topic;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 
 /**
  *
@@ -42,21 +42,21 @@ class ModeratorTopicMoveEvent extends Event
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Topic $topic
+     * @var \CCDNForum\ForumBundle\Entity\TopicInterface $topic
      */
     protected $topic;
 
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Board $oldBoard
+     * @var \CCDNForum\ForumBundle\Entity\BoardInterface $oldBoard
      */
     protected $oldBoard;
 
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Board $newBoard
+     * @var \CCDNForum\ForumBundle\Entity\BoardInterface $newBoard
      */
     protected $newBoard;
 
@@ -64,9 +64,9 @@ class ModeratorTopicMoveEvent extends Event
      *
      * @access public
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \CCDNForum\ForumBundle\Entity\Topic       $topic
+     * @param \CCDNForum\ForumBundle\Entity\TopicInterface       $topic
      */
-    public function __construct(Request $request, Board $oldBoard, Board $newBoard, Topic $topic = null)
+    public function __construct(Request $request, BoardInterface $oldBoard, BoardInterface $newBoard, Topic $topic = null)
     {
         $this->request = $request;
         $this->topic = $topic;
@@ -87,7 +87,7 @@ class ModeratorTopicMoveEvent extends Event
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Topic
+     * @return \CCDNForum\ForumBundle\Entity\TopicInterface
      */
     public function getTopic()
     {
@@ -97,7 +97,7 @@ class ModeratorTopicMoveEvent extends Event
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Board
+     * @return \CCDNForum\ForumBundle\Entity\BoardInterface
      */
     public function getOldBoard()
     {
@@ -107,7 +107,7 @@ class ModeratorTopicMoveEvent extends Event
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Board
+     * @return \CCDNForum\ForumBundle\Entity\BoardInterface
      */
     public function getNewBoard()
     {

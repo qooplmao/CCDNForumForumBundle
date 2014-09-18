@@ -22,8 +22,8 @@ use CCDNForum\ForumBundle\Component\Dispatcher\Event\UserTopicEvent;
 use CCDNForum\ForumBundle\Component\Dispatcher\Event\UserTopicFloodEvent;
 use CCDNForum\ForumBundle\Form\Handler\BaseFormHandler;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Topic;
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 use CCDNForum\ForumBundle\Component\FloodControl;
 
 /**
@@ -56,14 +56,14 @@ class PostCreateFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Topic $topic
+     * @var \CCDNForum\ForumBundle\Entity\TopicInterface $topic
      */
     protected $topic;
 
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Post $postToQuote
+     * @var \CCDNForum\ForumBundle\Entity\PostInterface $postToQuote
      */
     protected $postToQuote;
 
@@ -95,10 +95,10 @@ class PostCreateFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                                 $topic
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                                 $topic
      * @return \CCDNForum\ForumBundle\Form\Handler\User\Post\PostCreateFormHandler
      */
-    public function setTopic(Topic $topic)
+    public function setTopic(TopicInterface $topic)
     {
         $this->topic = $topic;
 
@@ -108,10 +108,10 @@ class PostCreateFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Post                                  $post
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                                  $post
      * @return \CCDNForum\ForumBundle\Form\Handler\User\Post\PostCreateFormHandler
      */
-    public function setPostToQuote(Post $post)
+    public function setPostToQuote(PostInterface $post)
     {
         $this->postToQuote = $post;
 
@@ -162,7 +162,7 @@ class PostCreateFormHandler extends BaseFormHandler
     {
         $quote = "";
 
-        if (is_object($this->postToQuote) && $this->postToQuote instanceof Post) {
+        if (is_object($this->postToQuote) && $this->postToQuote instanceof PostInterface) {
             $author = $this->postToQuote->getCreatedBy();
             $body = $this->postToQuote->getBody();
 
@@ -180,7 +180,7 @@ class PostCreateFormHandler extends BaseFormHandler
     public function getForm()
     {
         if (null == $this->form) {
-            if (! is_object($this->topic) || ! ($this->topic instanceof Topic)) {
+            if (! is_object($this->topic) || ! ($this->topic instanceof TopicInterface)) {
                 throw new \Exception('Topic must be specified to create a Reply in PostCreateFormHandler');
             }
 
@@ -199,9 +199,9 @@ class PostCreateFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param \CCDNForum\ForumBundle\Entity\Post $post
+     * @param \CCDNForum\ForumBundle\Entity\PostInterface $post
      */
-    protected function onSuccess(Post $post)
+    protected function onSuccess(PostInterface $post)
     {
         $post->setCreatedDate(new \DateTime());
         $post->setCreatedBy($this->user);

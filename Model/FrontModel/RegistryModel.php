@@ -16,7 +16,7 @@ namespace CCDNForum\ForumBundle\Model\FrontModel;
 use Symfony\Component\Security\Core\User\UserInterface;
 use CCDNForum\ForumBundle\Model\FrontModel\BaseModel;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Registry;
+use CCDNForum\ForumBundle\Entity\RegistryInterface;
 
 /**
  *
@@ -35,7 +35,7 @@ class RegistryModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Symfony\Component\Security\Core\User\UserInterface $user
-     * @return \CCDNForum\ForumBundle\Entity\Registry
+     * @return \CCDNForum\ForumBundle\Entity\RegistryInterface
      */
     public function findOrCreateOneRegistryForUser(UserInterface $user)
     {
@@ -54,7 +54,7 @@ class RegistryModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  int                                    $userId
-     * @return \CCDNForum\ForumBundle\Entity\Registry
+     * @return \CCDNForum\ForumBundle\Entity\RegistryInterface
      */
     public function findOneRegistryForUserById($userId)
     {
@@ -64,7 +64,7 @@ class RegistryModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Registry
+     * @return \CCDNForum\ForumBundle\Entity\RegistryInterface
      */
     public function createRegistry()
     {
@@ -74,10 +74,10 @@ class RegistryModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Registry                $registryModel
+     * @param  \CCDNForum\ForumBundle\Entity\RegistryInterface                $registryModel
      * @return \CCDNForum\ForumBundle\Model\FrontModel\RegistryModel
      */
-    public function saveRegistry(Registry $registry)
+    public function saveRegistry(RegistryInterface $registry)
     {
         $this->getManager()->saveRegistry($registry);
 

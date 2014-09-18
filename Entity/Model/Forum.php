@@ -13,11 +13,11 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use CCDNForum\ForumBundle\Entity\Category as ConcreteCategory;
-
-abstract class Forum
+abstract class Forum implements ForumInterface
 {
     /** @var $categories */
     protected $categories = null;
@@ -47,7 +47,7 @@ abstract class Forum
      *
      * Set categories
      *
-     * @return Forum
+     * @return ForumInterface
      */
     public function setCategories(ArrayCollection $categories = null)
     {
@@ -60,10 +60,10 @@ abstract class Forum
      *
      * Add category
      *
-     * @param  Category $category
-     * @return Forum
+     * @param  CategoryInterface $category
+     * @return ForumInterface
      */
-    public function addCategory(ConcreteCategory $category)
+    public function addCategory(CategoryInterface $category)
     {
         $this->categories->add($category);
 
@@ -74,10 +74,10 @@ abstract class Forum
      *
      * Remove Category
      *
-     * @param  Category $category
-     * @return Forum
+     * @param  CategoryInterface $category
+     * @return ForumInterface
      */
-    public function removeCategory(ConcreteCategory $category)
+    public function removeCategory(CategoryInterface $category)
     {
         $this->categories->removeElement($category);
 

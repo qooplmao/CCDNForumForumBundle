@@ -13,12 +13,12 @@
 
 namespace CCDNForum\ForumBundle\Component\TwigExtension;
 
-use CCDNForum\ForumBundle\Entity\Forum;
-use CCDNForum\ForumBundle\Entity\Category;
-use CCDNForum\ForumBundle\Entity\Board;
-use CCDNForum\ForumBundle\Entity\Topic;
-use CCDNForum\ForumBundle\Entity\Post;
-use CCDNForum\ForumBundle\Entity\Subscription;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
+use CCDNForum\ForumBundle\Entity\SubscriptionInterface;
 
 /**
  *
@@ -83,112 +83,112 @@ class AuthorizerExtension extends \Twig_Extension
         );
     }
 
-    public function canShowForum(Forum $forum)
+    public function canShowForum(ForumInterface $forum)
     {
         return $this->authorizer->canShowForum($forum);
     }
 
-    public function canShowCategory(Category $category, Forum $forum = null)
+    public function canShowCategory(CategoryInterface $category, ForumInterface $forum = null)
     {
         return $this->authorizer->canShowCategory($category, $forum);
     }
 
-    public function canShowBoard(Board $board, Forum $forum = null)
+    public function canShowBoard(BoardInterface $board, ForumInterface $forum = null)
     {
         return $this->authorizer->canShowBoard($board, $forum);
     }
 
-    public function canCreateTopicOnBoard(Board $board, Forum $forum = null)
+    public function canCreateTopicOnBoard(BoardInterface $board, ForumInterface $forum = null)
     {
         return $this->authorizer->canCreateTopicOnBoard($board, $forum);
     }
 
-    public function canReplyToTopicOnBoard(Board $board, Forum $forum = null)
+    public function canReplyToTopicOnBoard(BoardInterface $board, ForumInterface $forum = null)
     {
         return $this->authorizer->canReplyToTopicOnBoard($board, $forum);
     }
 
-    public function canShowTopic(Topic $topic, Forum $forum = null)
+    public function canShowTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canShowTopic($topic, $forum);
     }
 
-    public function canReplyToTopic(Topic $topic, Forum $forum = null)
+    public function canReplyToTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canReplyToTopic($topic, $forum);
     }
 
-    public function canDeleteTopic(Topic $topic, Forum $forum = null)
+    public function canDeleteTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canDeleteTopic($topic, $forum);
     }
 
-    public function canRestoreTopic(Topic $topic, Forum $forum = null)
+    public function canRestoreTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canRestoreTopic($topic, $forum);
     }
 
-    public function canCloseTopic(Topic $topic, Forum $forum = null)
+    public function canCloseTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canCloseTopic($topic, $forum);
     }
 
-    public function canReopenTopic(Topic $topic, Forum $forum = null)
+    public function canReopenTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canReopenTopic($topic, $forum);
     }
 
-    public function canTopicChangeBoard(Topic $topic, Forum $forum = null)
+    public function canTopicChangeBoard(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canTopicChangeBoard($topic, $forum);
     }
 
-    public function canStickyTopic(Topic $topic, Forum $forum = null)
+    public function canStickyTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canStickyTopic($topic, $forum);
     }
 
-    public function canUnstickyTopic(Topic $topic, Forum $forum = null)
+    public function canUnstickyTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         return $this->authorizer->canUnstickyTopic($topic, $forum);
     }
 
-    public function canShowPost(Post $post, Forum $forum = null)
+    public function canShowPost(PostInterface $post, ForumInterface $forum = null)
     {
         return $this->authorizer->canShowPost($post, $forum);
     }
 
-    public function canEditPost(Post $post, Forum $forum = null)
+    public function canEditPost(PostInterface $post, ForumInterface $forum = null)
     {
         return $this->authorizer->canEditPost($post, $forum);
     }
 
-    public function canDeletePost(Post $post, Forum $forum = null)
+    public function canDeletePost(PostInterface $post, ForumInterface $forum = null)
     {
         return $this->authorizer->canDeletePost($post, $forum);
     }
 
-    public function canRestorePost(Post $post, Forum $forum = null)
+    public function canRestorePost(PostInterface $post, ForumInterface $forum = null)
     {
         return $this->authorizer->canRestorePost($post, $forum);
     }
 
-    public function canLockPost(Post $post, Forum $forum = null)
+    public function canLockPost(PostInterface $post, ForumInterface $forum = null)
     {
         return $this->authorizer->canLockPost($post, $forum);
     }
 
-    public function canUnlockPost(Post $post, Forum $forum = null)
+    public function canUnlockPost(PostInterface $post, ForumInterface $forum = null)
     {
         return $this->authorizer->canUnlockPost($post, $forum);
     }
 
-    public function canSubscribeToTopic(Topic $topic, Forum $forum = null, Subscription $subscription = null)
+    public function canSubscribeToTopic(TopicInterface $topic, ForumInterface $forum = null, SubscriptionInterface $subscription = null)
     {
         return $this->authorizer->canSubscribeToTopic($topic, $forum, $subscription);
     }
 
-    public function canUnsubscribeFromTopic(Topic $topic, Forum $forum = null, Subscription $subscription = null)
+    public function canUnsubscribeFromTopic(TopicInterface $topic, ForumInterface $forum = null, SubscriptionInterface $subscription = null)
     {
         return $this->authorizer->canUnsubscribeFromTopic($topic, $forum, $subscription);
     }

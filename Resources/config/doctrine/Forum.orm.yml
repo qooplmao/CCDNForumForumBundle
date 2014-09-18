@@ -15,6 +15,6 @@ CCDNForum\ForumBundle\Entity\Forum:
             nullable: true
     oneToMany:
         categories:
-            targetEntity: CCDNForum\ForumBundle\Entity\Category
+            targetEntity: CCDNForum\ForumBundle\Entity\CategoryInterface
             mappedBy: forum
             cascade: ["persist", "remove"]

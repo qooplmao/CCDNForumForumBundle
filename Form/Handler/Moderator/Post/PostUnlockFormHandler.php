@@ -21,7 +21,7 @@ use CCDNForum\ForumBundle\Component\Dispatcher\ForumEvents;
 use CCDNForum\ForumBundle\Component\Dispatcher\Event\ModeratorPostEvent;
 use CCDNForum\ForumBundle\Form\Handler\BaseFormHandler;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -53,7 +53,7 @@ class PostUnlockFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Post $post
+     * @var \CCDNForum\ForumBundle\Entity\PostInterface $post
      */
     protected $post;
 
@@ -76,10 +76,10 @@ class PostUnlockFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Post                                       $post
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                                       $post
      * @return \CCDNForum\ForumBundle\Form\Handler\Moderator\Post\PostUnlockFormHandler
      */
-    public function setPost(Post $post)
+    public function setPost(PostInterface $post)
     {
         $this->post = $post;
 
@@ -94,7 +94,7 @@ class PostUnlockFormHandler extends BaseFormHandler
     public function getForm()
     {
         if (null == $this->form) {
-            if (! is_object($this->post) || ! ($this->post instanceof Post)) {
+            if (! is_object($this->post) || ! ($this->post instanceof PostInterface)) {
                 throw new \Exception('Post must be specified to unlock in PostUnlockFormHandler');
             }
 
@@ -109,9 +109,9 @@ class PostUnlockFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param \CCDNForum\ForumBundle\Entity\Post $post
+     * @param \CCDNForum\ForumBundle\Entity\PostInterface $post
      */
-    protected function onSuccess(Post $post)
+    protected function onSuccess(PostInterface $post)
     {
         $post->setUnlockedDate(new \Datetime('now'));
         $post->setUnlockedBy($this->user);

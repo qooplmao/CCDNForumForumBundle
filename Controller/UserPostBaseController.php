@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -31,10 +31,10 @@ class UserPostBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Post                        $post
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                        $post
      * @return \CCDNForum\ForumBundle\Form\Handler\PostUpdateFormHandler
      */
-    protected function getFormHandlerToEditPost(Post $post)
+    protected function getFormHandlerToEditPost(PostInterface $post)
     {
         // If post is the very first post of the topic then use a topic handler so user can change topic title.
         if ($post->getTopic()->getFirstPost()->getId() == $post->getId()) {
@@ -53,10 +53,10 @@ class UserPostBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Post                        $post
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                        $post
      * @return \CCDNForum\ForumBundle\Form\Handler\PostDeleteFormHandler
      */
-    protected function getFormHandlerToDeletePost(Post $post)
+    protected function getFormHandlerToDeletePost(PostInterface $post)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.post_delete');
 

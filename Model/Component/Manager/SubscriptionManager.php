@@ -18,8 +18,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface;
 use CCDNForum\ForumBundle\Model\Component\Manager\BaseManager;
 
-use CCDNForum\ForumBundle\Entity\Subscription;
-use CCDNForum\ForumBundle\Entity\Topic;
+use CCDNForum\ForumBundle\Entity\SubscriptionInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 
 /**
  *
@@ -37,7 +37,7 @@ class SubscriptionManager extends BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Subscription
+     * @return \CCDNForum\ForumBundle\Entity\SubscriptionInterface
      */
     public function createSubscription()
     {
@@ -51,7 +51,7 @@ class SubscriptionManager extends BaseManager implements ManagerInterface
      * @param  \Symfony\Component\Security\Core\User\UserInterface $userId
      * @return \CCDNForum\ForumBundle\Manager\ManagerInterface
      */
-    public function subscribe(Topic $topic, UserInterface $user)
+    public function subscribe(TopicInterface $topic, UserInterface $user)
     {
         $subscription = $this->model->findOneSubscriptionForTopicByIdAndUserById($topic->getId(), $user->getId());
 
@@ -75,11 +75,11 @@ class SubscriptionManager extends BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Topic             $topic
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface             $topic
      * @param  int                                             $userId
      * @return \CCDNForum\ForumBundle\Manager\ManagerInterface
      */
-    public function unsubscribe(Topic $topic, $userId)
+    public function unsubscribe(TopicInterface $topic, $userId)
     {
         $subscription = $this->model->findOneSubscriptionForTopicByIdAndUserById($topic->getId(), $userId);
 
@@ -98,10 +98,10 @@ class SubscriptionManager extends BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Subscription      $subscription
+     * @param  \CCDNForum\ForumBundle\Entity\SubscriptionInterface      $subscription
      * @return \CCDNForum\ForumBundle\Manager\ManagerInterface
      */
-    public function markAsRead(Subscription $subscription)
+    public function markAsRead(SubscriptionInterface $subscription)
     {
         $subscription->setRead(true);
 
@@ -113,10 +113,10 @@ class SubscriptionManager extends BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Subscription      $subscription
+     * @param  \CCDNForum\ForumBundle\Entity\SubscriptionInterface      $subscription
      * @return \CCDNForum\ForumBundle\Manager\ManagerInterface
      */
-    public function markAsUnread(Subscription $subscription)
+    public function markAsUnread(SubscriptionInterface $subscription)
     {
         $subscription->setRead(false);
 

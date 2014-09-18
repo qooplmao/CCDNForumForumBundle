@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Component\Helper;
 
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -67,9 +67,9 @@ class PostLockHelper
     /**
      *
      * @access public
-     * @param \CCDNForum\ForumBundle\Entity\Post $post
+     * @param \CCDNForum\ForumBundle\Entity\PostInterface $post
      */
-    public function setLockLimitOnPost(Post $post)
+    public function setLockLimitOnPost(PostInterface $post)
     {
         $post->setUnlockedUntilDate(new \Datetime('now + ' . $this->afterDays . ' days'));
     }
@@ -77,10 +77,10 @@ class PostLockHelper
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Post $post
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface $post
      * @return bool
      */
-    public function isLocked(Post $post)
+    public function isLocked(PostInterface $post)
     {
         if ($this->enabled) {
             return $post->isLocked();

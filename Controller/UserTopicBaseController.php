@@ -13,9 +13,9 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Forum;
-use CCDNForum\ForumBundle\Entity\Board;
-use CCDNForum\ForumBundle\Entity\Topic;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 
 /**
  *
@@ -33,11 +33,11 @@ class UserTopicBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Board                        $board
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                        $board
      * @return \CCDNForum\ForumBundle\Form\Handler\TopicCreateFormHandler
      */
-    protected function getFormHandlerToCreateTopic(Forum $forum, Board $board)
+    protected function getFormHandlerToCreateTopic(ForumInterface $forum, BoardInterface $board)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.topic_create');
 
@@ -52,10 +52,10 @@ class UserTopicBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                        $topic
      * @return \CCDNForum\ForumBundle\Form\Handler\TopicCreateFormHandler
      */
-    protected function getFormHandlerToReplyToTopic(Topic $topic)
+    protected function getFormHandlerToReplyToTopic(TopicInterface $topic)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.post_create');
 

@@ -17,12 +17,12 @@ use CCDNForum\ForumBundle\Component\Helper\RoleTransformer;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use CCDNForum\ForumBundle\Component\Helper\PostLockHelper;
-use CCDNForum\ForumBundle\Entity\Forum;
-use CCDNForum\ForumBundle\Entity\Category;
-use CCDNForum\ForumBundle\Entity\Board;
-use CCDNForum\ForumBundle\Entity\Topic;
-use CCDNForum\ForumBundle\Entity\Post;
-use CCDNForum\ForumBundle\Entity\Subscription;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
+use CCDNForum\ForumBundle\Entity\SubscriptionInterface;
 
 /**
  *
@@ -72,7 +72,7 @@ class Authorizer
         $this->roleTransformer = $roleTransformer;
     }
 
-    public function canShowForum(Forum $forum)
+    public function canShowForum(ForumInterface $forum)
     {
         return $forum->isAuthorisedToRead($this->securityContext);
     }
@@ -82,7 +82,7 @@ class Authorizer
         return true;
     }
 
-    public function canShowCategory(Category $category, Forum $forum = null)
+    public function canShowCategory(CategoryInterface $category, ForumInterface $forum = null)
     {
         if ($forum) {
             if ($category->getForum()) {
@@ -103,7 +103,7 @@ class Authorizer
         return true;
     }
 
-    public function canShowBoard(Board $board, Forum $forum = null)
+    public function canShowBoard(BoardInterface $board, ForumInterface $forum = null)
     {
         if ($board->getCategory()) {
             if (! $this->canShowCategory($board->getCategory(), $forum)) {
@@ -118,7 +118,7 @@ class Authorizer
         return true;
     }
 
-    public function canCreateTopicOnBoard(Board $board, Forum $forum = null)
+    public function canCreateTopicOnBoard(BoardInterface $board, ForumInterface $forum = null)
     {
         if (! $this->canShowBoard($board, $forum)) {
             return false;
@@ -135,7 +135,7 @@ class Authorizer
         return true;
     }
 
-    public function canReplyToTopicOnBoard(Board $board, Forum $forum = null)
+    public function canReplyToTopicOnBoard(BoardInterface $board, ForumInterface $forum = null)
     {
         if (! $this->canShowBoard($board, $forum)) {
             return false;
@@ -152,7 +152,7 @@ class Authorizer
         return true;
     }
 
-    public function canShowTopic(Topic $topic, Forum $forum = null)
+    public function canShowTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if ($topic->getBoard()) {
             if (! $this->canShowBoard($topic->getBoard(), $forum)) {
@@ -169,7 +169,7 @@ class Authorizer
         return true;
     }
 
-    public function canReplyToTopic(Topic $topic, Forum $forum = null)
+    public function canReplyToTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if ($topic->isClosed()) {
             return false;
@@ -190,7 +190,7 @@ class Authorizer
         return true;
     }
 
-    public function canDeleteTopic(Topic $topic, Forum $forum = null)
+    public function canDeleteTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if ($topic->isDeleted()) {
             return false;
@@ -207,7 +207,7 @@ class Authorizer
         return true;
     }
 
-    public function canRestoreTopic(Topic $topic, Forum $forum = null)
+    public function canRestoreTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if (! $topic->isDeleted()) {
             return false;
@@ -224,7 +224,7 @@ class Authorizer
         return true;
     }
 
-    public function canCloseTopic(Topic $topic, Forum $forum = null)
+    public function canCloseTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if ($topic->isClosed()) {
             return false;
@@ -243,7 +243,7 @@ class Authorizer
         return true;
     }
 
-    public function canReopenTopic(Topic $topic, Forum $forum = null)
+    public function canReopenTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if (! $topic->isClosed()) {
             return false;
@@ -262,7 +262,7 @@ class Authorizer
         return true;
     }
 
-    public function canTopicChangeBoard(Topic $topic, Forum $forum = null)
+    public function canTopicChangeBoard(TopicInterface $topic, ForumInterface $forum = null)
     {
         if (! $this->canShowTopic($topic, $forum)) {
             if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
@@ -277,7 +277,7 @@ class Authorizer
         return true;
     }
 
-    public function canStickyTopic(Topic $topic, Forum $forum = null)
+    public function canStickyTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             if (! $this->canShowTopic($topic, $forum)) {
@@ -296,7 +296,7 @@ class Authorizer
         return true;
     }
 
-    public function canUnstickyTopic(Topic $topic, Forum $forum = null)
+    public function canUnstickyTopic(TopicInterface $topic, ForumInterface $forum = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             if (! $this->canShowTopic($topic, $forum)) {
@@ -315,7 +315,7 @@ class Authorizer
         return true;
     }
 
-    public function canShowPost(Post $post, Forum $forum = null)
+    public function canShowPost(PostInterface $post, ForumInterface $forum = null)
     {
         if ($post->getTopic()) {
             if (! $this->canShowTopic($post->getTopic(), $forum)) {
@@ -330,7 +330,7 @@ class Authorizer
         return true;
     }
 
-    public function canEditPost(Post $post, Forum $forum = null)
+    public function canEditPost(PostInterface $post, ForumInterface $forum = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
@@ -359,7 +359,7 @@ class Authorizer
         return true;
     }
 
-    public function canDeletePost(Post $post, Forum $forum = null)
+    public function canDeletePost(PostInterface $post, ForumInterface $forum = null)
     {
         if ($post->isDeleted()) {
             return false;
@@ -392,7 +392,7 @@ class Authorizer
         return true;
     }
 
-    public function canRestorePost(Post $post, Forum $forum = null)
+    public function canRestorePost(PostInterface $post, ForumInterface $forum = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
@@ -409,7 +409,7 @@ class Authorizer
         return true;
     }
 
-    public function canLockPost(Post $post, Forum $forum = null)
+    public function canLockPost(PostInterface $post, ForumInterface $forum = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
@@ -426,7 +426,7 @@ class Authorizer
         return true;
     }
 
-    public function canUnlockPost(Post $post, Forum $forum = null)
+    public function canUnlockPost(PostInterface $post, ForumInterface $forum = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
@@ -443,7 +443,7 @@ class Authorizer
         return true;
     }
 
-    public function canSubscribeToTopic(Topic $topic, Forum $forum = null, Subscription $subscription = null)
+    public function canSubscribeToTopic(TopicInterface $topic, ForumInterface $forum = null, SubscriptionInterface $subscription = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
@@ -468,7 +468,7 @@ class Authorizer
         return true;
     }
 
-    public function canUnsubscribeFromTopic(Topic $topic, Forum $forum = null, Subscription $subscription = null)
+    public function canUnsubscribeFromTopic(TopicInterface $topic, ForumInterface $forum = null, SubscriptionInterface $subscription = null)
     {
         if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;

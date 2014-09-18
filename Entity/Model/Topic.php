@@ -13,15 +13,15 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
+use CCDNForum\ForumBundle\Entity\SubscriptionInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use CCDNForum\ForumBundle\Entity\Board as ConcreteBoard;
-use CCDNForum\ForumBundle\Entity\Post as ConcretePost;
-use CCDNForum\ForumBundle\Entity\Subscription as ConcreteSubscription;
-
-abstract class Topic
+abstract class Topic implements TopicInterface
 {
     /** @var Board $board */
     protected $board = null;
@@ -61,7 +61,7 @@ abstract class Topic
     /**
      * Get board
      *
-     * @return Board
+     * @return BoardInterface
      */
     public function getBoard()
     {
@@ -71,10 +71,10 @@ abstract class Topic
     /**
      * Set board
      *
-     * @param  Board $board
-     * @return Topic
+     * @param  BoardInterface $board
+     * @return TopicInterface
      */
-    public function setBoard(ConcreteBoard $board = null)
+    public function setBoard(BoardInterface $board = null)
     {
         $this->board = $board;
 
@@ -95,7 +95,7 @@ abstract class Topic
      * Set closed_by
      *
      * @param  UserInterface $closedBy
-     * @return Topic
+     * @return TopicInterface
      */
     public function setClosedBy(UserInterface $closedBy = null)
     {
@@ -118,7 +118,7 @@ abstract class Topic
      * Set deleted_by
      *
      * @param  UserInterface $deletedBy
-     * @return Topic
+     * @return TopicInterface
      */
     public function setDeletedBy(UserInterface $deletedBy = null)
     {
@@ -141,7 +141,7 @@ abstract class Topic
      * Set stickiedBy
      *
      * @param  UserInterface $stickiedBy
-     * @return Topic
+     * @return TopicInterface
      */
     public function setStickiedBy(UserInterface $stickiedBy = null)
     {
@@ -153,7 +153,7 @@ abstract class Topic
     /**
      * Get first_post
      *
-     * @return Post
+     * @return PostInterface
      */
     public function getFirstPost()
     {
@@ -163,10 +163,10 @@ abstract class Topic
     /**
      * Set first_post
      *
-     * @param  Post  $firstPost
-     * @return Topic
+     * @param  PostInterface  $firstPost
+     * @return TopicInterface
      */
-    public function setFirstPost(ConcretePost $firstPost = null)
+    public function setFirstPost(PostInterface $firstPost = null)
     {
         $this->firstPost = $firstPost;
 
@@ -176,7 +176,7 @@ abstract class Topic
     /**
      * Get last_post
      *
-     * @return Post
+     * @return PostInterface
      */
     public function getLastPost()
     {
@@ -186,10 +186,10 @@ abstract class Topic
     /**
      * Set last_post
      *
-     * @param  Post  $lastPost
-     * @return Topic
+     * @param  PostInterface  $lastPost
+     * @return TopicInterface
      */
-    public function setLastPost(ConcretePost $lastPost = null)
+    public function setLastPost(PostInterface $lastPost = null)
     {
         $this->lastPost = $lastPost;
 
@@ -212,7 +212,7 @@ abstract class Topic
      * Set posts
      *
      * @param  ArrayCollection $posts
-     * @return Topic
+     * @return TopicInterface
      */
     public function setPosts(ArrayCollection $posts = null)
     {
@@ -225,10 +225,10 @@ abstract class Topic
      *
      * Add post
      *
-     * @param  Post  $post
-     * @return Topic
+     * @param  PostInterface  $post
+     * @return TopicInterface
      */
-    public function addPost(ConcretePost $post)
+    public function addPost(PostInterface $post)
     {
         $this->posts->add($post);
 
@@ -237,10 +237,10 @@ abstract class Topic
 
     /**
      *
-     * @param  Post  $post
-     * @return Topic
+     * @param  PostInterface  $post
+     * @return TopicInterface
      */
-    public function removePost(ConcretePost $post)
+    public function removePost(PostInterface $post)
     {
         $this->posts->removeElement($post);
 
@@ -261,7 +261,7 @@ abstract class Topic
     /**
      *
      * @param  ArrayCollection $subscriptions
-     * @return Topic
+     * @return TopicInterface
      */
     public function setSubscriptions(ArrayCollection $subscriptions = null)
     {
@@ -273,10 +273,10 @@ abstract class Topic
     /**
      * Add subscription
      *
-     * @param  Subscription $subscription
-     * @return Topic
+     * @param  SubscriptionInterface $subscription
+     * @return TopicInterface
      */
-    public function addSubscription(ConcreteSubscription $subscription)
+    public function addSubscription(SubscriptionInterface $subscription)
     {
         $this->subscriptions->add($subscription);
 
@@ -285,10 +285,10 @@ abstract class Topic
 
     /**
      *
-     * @param Subscription $subscription
+     * @param SubscriptionInterface $subscription
      * @return $this
      */
-    public function removeSubscription(ConcreteSubscription $subscription)
+    public function removeSubscription(SubscriptionInterface $subscription)
     {
         $this->subscriptions->removeElement($subscription);
 

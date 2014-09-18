@@ -19,8 +19,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\EventDispatcher\Event;
 
-use CCDNForum\ForumBundle\Entity\Topic;
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -224,11 +224,11 @@ class BaseController extends ContainerAware
      *
      * @access protected
      * @param  string                                             $forumName
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                $topic
-     * @param  \CCDNForum\ForumBundle\Entity\Post                 $post
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                $topic
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                 $post
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function redirectResponseForTopicOnPageFromPost($forumName, Topic $topic, Post $post)
+    protected function redirectResponseForTopicOnPageFromPost($forumName, TopicInterface $topic, PostInterface $post)
     {
         //$page = $this->getTopicModel()->getPageForPostOnTopic($topic, $topic->getLastPost()); // Page of the last post.
         $response = $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(

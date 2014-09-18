@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Category;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
 
 /**
  *
@@ -55,7 +55,7 @@ class AdminCategoryBaseController extends BaseController
      * @access protected
      * @return \CCDNForum\ForumBundle\Form\Handler\CategoryUpdateFormHandler
      */
-    protected function getFormHandlerToUpdateCategory(Category $category)
+    protected function getFormHandlerToUpdateCategory(CategoryInterface $category)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.category_update');
 
@@ -71,7 +71,7 @@ class AdminCategoryBaseController extends BaseController
      * @access protected
      * @return \CCDNForum\ForumBundle\Form\Handler\CategoryDeleteFormHandler
      */
-    protected function getFormHandlerToDeleteCategory(Category $category)
+    protected function getFormHandlerToDeleteCategory(CategoryInterface $category)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.category_delete');
 
@@ -85,10 +85,10 @@ class AdminCategoryBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Category $category
+     * @param  \CCDNForum\ForumBundle\Entity\CategoryInterface $category
      * @return array
      */
-    protected function getFilterQueryStrings(Category $category)
+    protected function getFilterQueryStrings(CategoryInterface $category)
     {
         $params = array();
 

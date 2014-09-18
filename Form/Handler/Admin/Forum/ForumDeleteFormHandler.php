@@ -23,7 +23,7 @@ use CCDNForum\ForumBundle\Component\Dispatcher\ForumEvents;
 use CCDNForum\ForumBundle\Component\Dispatcher\Event\AdminForumEvent;
 use CCDNForum\ForumBundle\Form\Handler\BaseFormHandler;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Forum;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
 
 /**
  *
@@ -55,7 +55,7 @@ class ForumDeleteFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Forum $forum
+     * @var \CCDNForum\ForumBundle\Entity\ForumInterface $forum
      */
     protected $forum;
 
@@ -78,10 +78,10 @@ class ForumDeleteFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                                    $forum
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                                    $forum
      * @return \CCDNForum\ForumBundle\Form\Handler\Admin\Forum\ForumDeleteFormHandler
      */
-    public function setForum(Forum $forum)
+    public function setForum(ForumInterface $forum)
     {
         $this->forum = $forum;
 
@@ -96,7 +96,7 @@ class ForumDeleteFormHandler extends BaseFormHandler
     public function getForm()
     {
         if (null == $this->form) {
-            if (!is_object($this->forum) && !$this->forum instanceof Forum) {
+            if (!is_object($this->forum) && !$this->forum instanceof ForumInterface) {
                 throw new \Exception('Forum object must be specified to delete.');
             }
 
@@ -111,9 +111,9 @@ class ForumDeleteFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param \CCDNForum\ForumBundle\Entity\Forum $forum
+     * @param \CCDNForum\ForumBundle\Entity\ForumInterface $forum
      */
-    protected function onSuccess(Forum $forum)
+    protected function onSuccess(ForumInterface $forum)
     {
         $this->dispatcher->dispatch(ForumEvents::ADMIN_FORUM_DELETE_SUCCESS, new AdminForumEvent($this->request, $forum));
 

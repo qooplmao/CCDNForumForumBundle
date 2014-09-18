@@ -13,9 +13,10 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\RegistryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-abstract class Registry
+abstract class Registry implements RegistryInterface
 {
     /** @var UserInterface $ownedBy */
     protected $ownedBy = null;
@@ -43,7 +44,7 @@ abstract class Registry
      * Set owned_by
      *
      * @param  UserInterface $ownedBy
-     * @return Registry
+     * @return RegistryInterface
      */
     public function setOwnedBy(UserInterface $ownedBy = null)
     {

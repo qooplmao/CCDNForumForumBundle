@@ -13,12 +13,13 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use CCDNForum\ForumBundle\Entity\Category as ConcreteCategory;
-use CCDNForum\ForumBundle\Entity\Topic as ConcreteTopic;
-
-abstract class Board
+abstract class Board implements BoardInterface
 {
     /** @var Category $category */
     protected $category = null;
@@ -42,7 +43,7 @@ abstract class Board
     /**
      * Get category
      *
-     * @return Category
+     * @return CategoryInterface
      */
     public function getCategory()
     {
@@ -52,10 +53,10 @@ abstract class Board
     /**
      * Set category
      *
-     * @param  Category $category
-     * @return Board
+     * @param  CategoryInterface $category
+     * @return BoardInterface
      */
-    public function setCategory(ConcreteCategory $category = null)
+    public function setCategory(CategoryInterface $category = null)
     {
         $this->category = $category;
 
@@ -76,7 +77,7 @@ abstract class Board
      * Set topics
      *
      * @param  ArrayCollection $topics
-     * @return Board
+     * @return BoardInterface
      */
     public function setTopics(ArrayCollection $topics = null)
     {
@@ -88,10 +89,10 @@ abstract class Board
     /**
      * Add topic
      *
-     * @param  Topic $topic
-     * @return Board
+     * @param  TopicInterface $topic
+     * @return BoardInterface
      */
-    public function addTopic(ConcreteTopic $topic)
+    public function addTopic(TopicInterface $topic)
     {
         $this->topics->add($topic);
 
@@ -99,11 +100,11 @@ abstract class Board
     }
 
     /**
-     * @param Topic $topic
+     * @param TopicInterface $topic
      *
      * @return $this
      */
-    public function removeTopic(ConcreteTopic $topic)
+    public function removeTopic(TopicInterface $topic)
     {
         $this->topics->removeElement($topic);
 
@@ -113,7 +114,7 @@ abstract class Board
     /**
      * Get last_post
      *
-     * @return Post
+     * @return PostInterface
      */
     public function getLastPost()
     {
@@ -123,8 +124,8 @@ abstract class Board
     /**
      * Set last_post
      *
-     * @param  Post  $lastPost
-     * @return Board
+     * @param  PostInterface  $lastPost
+     * @return BoardInterface
      */
     public function setLastPost($lastPost = null)
     {

@@ -13,11 +13,11 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\PostInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use CCDNForum\ForumBundle\Entity\Topic as ConcreteTopic;
-
-abstract class Post
+abstract class Post implements PostInterface
 {
     /** @var Topic $topic */
     protected $topic = null;
@@ -49,7 +49,7 @@ abstract class Post
     /**
      * Get topic
      *
-     * @return Topic
+     * @return TopicInterface
      */
     public function getTopic()
     {
@@ -59,10 +59,10 @@ abstract class Post
     /**
      * Set topic
      *
-     * @param  Topic $topic
-     * @return Post
+     * @param  TopicInterface $topic
+     * @return PostInterface
      */
-    public function setTopic(ConcreteTopic $topic = null)
+    public function setTopic(TopicInterface $topic = null)
     {
         $this->topic = $topic;
 
@@ -83,7 +83,7 @@ abstract class Post
      * Set created_by
      *
      * @param  UserInterface $createdBy
-     * @return Post
+     * @return PostInterface
      */
     public function setCreatedBy(UserInterface $createdBy = null)
     {
@@ -106,7 +106,7 @@ abstract class Post
      * Set edited_by
      *
      * @param  UserInterface $editedBy
-     * @return Post
+     * @return PostInterface
      */
     public function setEditedBy(UserInterface $editedBy = null)
     {
@@ -129,7 +129,7 @@ abstract class Post
      * Set deleted_by
      *
      * @param  UserInterface $deletedBy
-     * @return Post
+     * @return PostInterface
      */
     public function setDeletedBy(UserInterface $deletedBy = null)
     {
@@ -152,7 +152,7 @@ abstract class Post
      * Set unlocked_by
      *
      * @param  UserInterface $unlockedBy
-     * @return Post
+     * @return PostInterface
      */
     public function setUnlockedBy(UserInterface $unlockedBy = null)
     {

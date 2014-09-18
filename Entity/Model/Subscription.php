@@ -13,12 +13,12 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\ForumInterface;
+use CCDNForum\ForumBundle\Entity\SubscriptionInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use CCDNForum\ForumBundle\Entity\Forum as ConcreteForum;
-use CCDNForum\ForumBundle\Entity\Topic as ConcreteTopic;
-
-abstract class Subscription
+abstract class Subscription implements SubscriptionInterface
 {
     /** @var Topic $topic */
     protected $forum = null;
@@ -41,7 +41,7 @@ abstract class Subscription
     /**
      * Get topic
      *
-     * @return Forum
+     * @return ForumInterface
      */
     public function getForum()
     {
@@ -51,10 +51,10 @@ abstract class Subscription
     /**
      * Set topic
      *
-     * @param  Forum        $forum
-     * @return Subscription
+     * @param  ForumInterface        $forum
+     * @return SubscriptionInterface
      */
-    public function setForum(ConcreteForum $forum = null)
+    public function setForum(ForumInterface $forum = null)
     {
         $this->forum = $forum;
 
@@ -64,7 +64,7 @@ abstract class Subscription
     /**
      * Get topic
      *
-     * @return Topic
+     * @return TopicInterface
      */
     public function getTopic()
     {
@@ -74,10 +74,10 @@ abstract class Subscription
     /**
      * Set topic
      *
-     * @param  Topic        $topic
-     * @return Subscription
+     * @param  TopicInterface        $topic
+     * @return SubscriptionInterface
      */
-    public function setTopic(ConcreteTopic $topic = null)
+    public function setTopic(TopicInterface $topic = null)
     {
         $this->topic = $topic;
 
@@ -98,7 +98,7 @@ abstract class Subscription
      * Set owned_by
      *
      * @param  UserInterface $ownedBy
-     * @return Subscription
+     * @return SubscriptionInterface
      */
     public function setOwnedBy(UserInterface $ownedBy = null)
     {

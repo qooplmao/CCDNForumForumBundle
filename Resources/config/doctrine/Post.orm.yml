@@ -33,7 +33,7 @@ CCDNForum\ForumBundle\Entity\Post:
             nullable: true
     manyToOne:
         topic:
-            targetEntity: CCDNForum\ForumBundle\Entity\Topic
+            targetEntity: CCDNForum\ForumBundle\Entity\TopicInterface
             cascade: ["persist"]
             inversedBy: posts
             #nullable: true

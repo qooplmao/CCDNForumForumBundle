@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Board;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
 
 /**
  *
@@ -55,7 +55,7 @@ class AdminBoardBaseController extends BaseController
      * @access protected
      * @return \CCDNForum\ForumBundle\Form\Handler\BoardUpdateFormHandler
      */
-    protected function getFormHandlerToUpdateBoard(Board $board)
+    protected function getFormHandlerToUpdateBoard(BoardInterface $board)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.board_update');
 
@@ -71,7 +71,7 @@ class AdminBoardBaseController extends BaseController
      * @access protected
      * @return \CCDNForum\ForumBundle\Form\Handler\BoardDeleteFormHandler
      */
-    protected function getFormHandlerToDeleteBoard(Board $board)
+    protected function getFormHandlerToDeleteBoard(BoardInterface $board)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.board_delete');
 
@@ -88,7 +88,7 @@ class AdminBoardBaseController extends BaseController
      * @param  \CCDNForum\ForumBundle\Entity\Board $board
      * @return array
      */
-    protected function getFilterQueryStrings(Board $board)
+    protected function getFilterQueryStrings(BoardInterface $board)
     {
         $params = array();
 

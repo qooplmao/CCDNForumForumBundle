@@ -13,8 +13,8 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Forum;
-use CCDNForum\ForumBundle\Entity\Topic;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 
 /**
  *
@@ -32,10 +32,10 @@ class ModeratorTopicBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                        $topic
      * @return \CCDNForum\ForumBundle\Form\Handler\TopicCreateFormHandler
      */
-    protected function getFormHandlerToDeleteTopic(Topic $topic)
+    protected function getFormHandlerToDeleteTopic(TopicInterface $topic)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.topic_delete');
 
@@ -49,11 +49,11 @@ class ModeratorTopicBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                             $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                             $topic
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                             $forum
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                             $topic
      * @return \CCDNForum\ForumBundle\Form\Handler\TopicChangeBoardFormHandler
      */
-    protected function getFormHandlerToChangeBoardOnTopic(Forum $forum, Topic $topic)
+    protected function getFormHandlerToChangeBoardOnTopic(ForumInterface $forum, TopicInterface $topic)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.change_topics_board');
 

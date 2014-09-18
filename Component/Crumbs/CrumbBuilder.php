@@ -13,11 +13,11 @@
 
 namespace CCDNForum\ForumBundle\Component\Crumbs;
 
-use CCDNForum\ForumBundle\Entity\Forum;
-use CCDNForum\ForumBundle\Entity\Category;
-use CCDNForum\ForumBundle\Entity\Board;
-use CCDNForum\ForumBundle\Entity\Topic;
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -74,10 +74,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addAdminManageForumsEdit(Forum $forum)
+    public function addAdminManageForumsEdit(ForumInterface $forum)
     {
         return $this->createCrumbTrail()
             ->add('crumbs.admin.index', 'ccdn_forum_admin_index')
@@ -102,10 +102,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addAdminManageForumsDelete(Forum $forum)
+    public function addAdminManageForumsDelete(ForumInterface $forum)
     {
         return $this->createCrumbTrail()
             ->add('crumbs.admin.index', 'ccdn_forum_admin_index')
@@ -157,10 +157,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Category                     $category
+     * @param  \CCDNForum\ForumBundle\Entity\CategoryInterface                     $category
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addAdminManageCategoriesEdit(Category $category)
+    public function addAdminManageCategoriesEdit(CategoryInterface $category)
     {
         return $this->createCrumbTrail()
             ->add('crumbs.admin.index', 'ccdn_forum_admin_index')
@@ -185,10 +185,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Category                     $category
+     * @param  \CCDNForum\ForumBundle\Entity\CategoryInterface                     $category
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addAdminManageCategoriesDelete(Category $category)
+    public function addAdminManageCategoriesDelete(CategoryInterface $category)
     {
         return $this->createCrumbTrail()
             ->add('crumbs.admin.index', 'ccdn_forum_admin_index')
@@ -240,10 +240,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Board                        $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                        $board
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addAdminManageBoardsEdit(Board $board)
+    public function addAdminManageBoardsEdit(BoardInterface $board)
     {
         return $this->createCrumbTrail()
             ->add('crumbs.admin.index', 'ccdn_forum_admin_index')
@@ -268,10 +268,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Board                        $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                        $board
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addAdminManageBoardsDelete(Board $board)
+    public function addAdminManageBoardsDelete(BoardInterface $board)
     {
         return $this->createCrumbTrail()
             ->add('crumbs.admin.index', 'ccdn_forum_admin_index')
@@ -296,10 +296,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserCategoryIndex(Forum $forum = null)
+    public function addUserCategoryIndex(ForumInterface $forum = null)
     {
         return $this->createCrumbTrail()
             ->add(
@@ -321,11 +321,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Category                     $category
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\CategoryInterface                     $category
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserCategoryShow(Forum $forum, Category $category)
+    public function addUserCategoryShow(ForumInterface $forum, CategoryInterface $category)
     {
         return $this->addUserCategoryIndex($forum)
             ->add(
@@ -344,11 +344,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Board                        $board
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                        $board
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserBoardShow(Forum $forum, Board $board)
+    public function addUserBoardShow(ForumInterface $forum, BoardInterface $board)
     {
         return $this->addUserCategoryShow($forum, $board->getCategory())
             ->add(
@@ -367,11 +367,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                        $topic
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserTopicShow(Forum $forum, Topic $topic)
+    public function addUserTopicShow(ForumInterface $forum, TopicInterface $topic)
     {
         return $this->addUserBoardShow($forum, $topic->getBoard())
             ->add(
@@ -390,11 +390,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Board                        $board
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                        $board
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserTopicCreate(Forum $forum, Board $board)
+    public function addUserTopicCreate(ForumInterface $forum, BoardInterface $board)
     {
         return $this->addUserBoardShow($forum, $board)
             ->add(
@@ -415,11 +415,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                        $topic
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserTopicReply(Forum $forum, Topic $topic)
+    public function addUserTopicReply(ForumInterface $forum, TopicInterface $topic)
     {
         return $this->addUserTopicShow($forum, $topic)
             ->add(
@@ -440,11 +440,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Post                         $post
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                         $post
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserPostShow(Forum $forum, Post $post)
+    public function addUserPostShow(ForumInterface $forum, PostInterface $post)
     {
         return $this->addUserTopicShow($forum, $post->getTopic())
             ->add(
@@ -463,11 +463,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Post                         $post
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                         $post
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserPostDelete(Forum $forum, Post $post)
+    public function addUserPostDelete(ForumInterface $forum, PostInterface $post)
     {
         return $this->addUserPostShow($forum, $post)
             ->add(
@@ -488,10 +488,10 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addUserSubscriptionIndex(Forum $forum)
+    public function addUserSubscriptionIndex(ForumInterface $forum)
     {
         return $this->addUserCategoryIndex($forum)
             ->add(
@@ -511,11 +511,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                        $topic
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addModeratorTopicDelete(Forum $forum, Topic $topic)
+    public function addModeratorTopicDelete(ForumInterface $forum, TopicInterface $topic)
     {
         return $this->addUserTopicShow($forum, $topic)
             ->add(
@@ -536,11 +536,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                        $topic
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addModeratorTopicChangeBoard(Forum $forum, Topic $topic)
+    public function addModeratorTopicChangeBoard(ForumInterface $forum, TopicInterface $topic)
     {
         return $this->addUserTopicShow($forum, $topic)
             ->add(
@@ -561,11 +561,11 @@ class CrumbBuilder extends BaseCrumbBuilder
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Forum                        $forum
-     * @param  \CCDNForum\ForumBundle\Entity\Post                         $post
+     * @param  \CCDNForum\ForumBundle\Entity\ForumInterface                        $forum
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                         $post
      * @return \CCDNForum\ForumBundle\Component\Crumbs\Factory\CrumbTrail
      */
-    public function addModeratorPostUnlock(Forum $forum, Post $post)
+    public function addModeratorPostUnlock(ForumInterface $forum, PostInterface $post)
     {
         return $this->addUserPostShow($forum, $post)
             ->add(

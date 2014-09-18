@@ -13,12 +13,12 @@
 
 namespace CCDNForum\ForumBundle\Entity\Model;
 
+use CCDNForum\ForumBundle\Entity\BoardInterface;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use CCDNForum\ForumBundle\Entity\Forum as ConcreteForum;
-use CCDNForum\ForumBundle\Entity\Board as ConcreteBoard;
-
-abstract class Category
+abstract class Category implements CategoryInterface
 {
     /** @var Forum $forum */
     protected $forum;
@@ -40,7 +40,7 @@ abstract class Category
      *
      * Get Forum
      *
-     * @return Forum
+     * @return ForumInterface
      */
     public function getForum()
     {
@@ -51,10 +51,10 @@ abstract class Category
      *
      * Set Forum
      *
-     * @param  Forum    $forum
-     * @return Category
+     * @param  ForumInterface    $forum
+     * @return CategoryInterface
      */
-    public function setForum(ConcreteForum $forum = null)
+    public function setForum(ForumInterface $forum = null)
     {
         if ($this->forum) {
             if ($forum) {
@@ -92,7 +92,7 @@ abstract class Category
      * Set boards
      *
      * @param  ArrayCollection $boards
-     * @return Category
+     * @return CategoryInterface
      */
     public function setBoards(ArrayCollection $boards = null)
     {
@@ -105,10 +105,10 @@ abstract class Category
      *
      * Add board
      *
-     * @param  Board    $board
-     * @return Category
+     * @param  BoardInterface    $board
+     * @return CategoryInterface
      */
-    public function addBoard(ConcreteBoard $board)
+    public function addBoard(BoardInterface $board)
     {
         $this->boards->add($board);
 
@@ -119,10 +119,10 @@ abstract class Category
      *
      * Remove Board
      *
-     * @param  Board    $board
-     * @return Category
+     * @param  BoardInterface    $board
+     * @return CategoryInterface
      */
-    public function removeBoard(ConcreteBoard $board)
+    public function removeBoard(BoardInterface $board)
     {
         $this->boards->removeElement($board);
 

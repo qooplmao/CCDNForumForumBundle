@@ -16,7 +16,7 @@ namespace CCDNForum\ForumBundle\Component\Dispatcher\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
-use CCDNForum\ForumBundle\Entity\Category;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
 
 /**
  *
@@ -41,7 +41,7 @@ class AdminCategoryEvent extends Event
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Category $category
+     * @var \CCDNForum\ForumBundle\Entity\CategoryInterface $category
      */
     protected $category;
 
@@ -49,9 +49,9 @@ class AdminCategoryEvent extends Event
      *
      * @access public
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \CCDNForum\ForumBundle\Entity\Category    $category
+     * @param \CCDNForum\ForumBundle\Entity\CategoryInterface    $category
      */
-    public function __construct(Request $request, Category $category = null)
+    public function __construct(Request $request, CategoryInterface $category = null)
     {
         $this->request = $request;
         $this->category = $category;
@@ -70,7 +70,7 @@ class AdminCategoryEvent extends Event
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Category
+     * @return \CCDNForum\ForumBundle\Entity\CategoryInterface
      */
     public function getCategory()
     {

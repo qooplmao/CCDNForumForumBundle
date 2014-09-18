@@ -17,12 +17,12 @@ CCDNForum\ForumBundle\Entity\Category:
             nullable: true
     oneToMany:
         boards:
-            targetEntity: CCDNForum\ForumBundle\Entity\Board
+            targetEntity: CCDNForum\ForumBundle\Entity\BoardInterface
             mappedBy: category
             cascade: ["persist", "remove"]
     manyToOne:
         forum:
-            targetEntity: CCDNForum\ForumBundle\Entity\Forum
+            targetEntity: CCDNForum\ForumBundle\Entity\ForumInterface
             inversedBy: categories
             nullable: true
             joinColumn:

@@ -21,7 +21,7 @@ use CCDNForum\ForumBundle\Component\Dispatcher\ForumEvents;
 use CCDNForum\ForumBundle\Component\Dispatcher\Event\AdminCategoryEvent;
 use CCDNForum\ForumBundle\Form\Handler\BaseFormHandler;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Category;
+use CCDNForum\ForumBundle\Entity\CategoryInterface;
 
 /**
  *
@@ -53,7 +53,7 @@ class CategoryUpdateFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Category $category
+     * @var \CCDNForum\ForumBundle\Entity\CategoryInterface $category
      */
     protected $category;
 
@@ -76,10 +76,10 @@ class CategoryUpdateFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Category                                       $category
+     * @param  \CCDNForum\ForumBundle\Entity\CategoryInterface                                       $category
      * @return \CCDNForum\ForumBundle\Form\Handler\Admin\Category\CategoryUpdateFormHandler
      */
-    public function setCategory(Category $category)
+    public function setCategory(CategoryInterface $category)
     {
         $this->category = $category;
 
@@ -94,7 +94,7 @@ class CategoryUpdateFormHandler extends BaseFormHandler
     public function getForm()
     {
         if (null == $this->form) {
-            if (!is_object($this->category) && !$this->category instanceof Category) {
+            if (!is_object($this->category) && !$this->category instanceof CategoryInterface) {
                 throw new \Exception('Category object must be specified to edit.');
             }
 
@@ -109,9 +109,9 @@ class CategoryUpdateFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param \CCDNForum\ForumBundle\Entity\Category $category
+     * @param \CCDNForum\ForumBundle\Entity\CategoryInterface $category
      */
-    protected function onSuccess(Category $category)
+    protected function onSuccess(CategoryInterface $category)
     {
         $this->dispatcher->dispatch(ForumEvents::ADMIN_CATEGORY_EDIT_SUCCESS, new AdminCategoryEvent($this->request, $category));
 

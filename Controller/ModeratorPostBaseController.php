@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -31,10 +31,10 @@ class ModeratorPostBaseController extends BaseController
     /**
      *
      * @access protected
-     * @param  \CCDNForum\ForumBundle\Entity\Post                                       $post
+     * @param  \CCDNForum\ForumBundle\Entity\PostInterface                                       $post
      * @return \CCDNForum\ForumBundle\Form\Handler\Moderator\Post\PostUnlockFormHandler
      */
-    protected function getFormHandlerToUnlockPost(Post $post)
+    protected function getFormHandlerToUnlockPost(PostInterface $post)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.post_unlock');
 

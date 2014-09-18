@@ -16,7 +16,7 @@ namespace CCDNForum\ForumBundle\Model\FrontModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use CCDNForum\ForumBundle\Model\FrontModel\BaseModel;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Board;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
 
 /**
  *
@@ -34,7 +34,7 @@ class BoardModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Board
+     * @return \CCDNForum\ForumBundle\Entity\BoardInterface
      */
     public function createBoard()
     {
@@ -77,7 +77,7 @@ class BoardModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  int                                 $boardId
-     * @return \CCDNForum\ForumBundle\Entity\Board
+     * @return \CCDNForum\ForumBundle\Entity\BoardInterface
      */
     public function findOneBoardById($boardId)
     {
@@ -88,7 +88,7 @@ class BoardModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  int                                 $boardId
-     * @return \CCDNForum\ForumBundle\Entity\Board
+     * @return \CCDNForum\ForumBundle\Entity\BoardInterface
      */
     public function findOneBoardByIdWithCategory($boardId)
     {
@@ -108,10 +108,10 @@ class BoardModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Board                             $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                             $board
      * @return \CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface
      */
-    public function saveBoard(Board $board)
+    public function saveBoard(BoardInterface $board)
     {
         return $this->getManager()->saveBoard($board);
     }
@@ -119,10 +119,10 @@ class BoardModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Board                             $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                             $board
      * @return \CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface
      */
-    public function updateBoard(Board $board)
+    public function updateBoard(BoardInterface $board)
     {
        return $this->getManager()->updateBoard($board);
     }
@@ -130,10 +130,10 @@ class BoardModel extends BaseModel implements ModelInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Board                             $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                             $board
      * @return \CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface
      */
-    public function deleteBoard(Board $board)
+    public function deleteBoard(BoardInterface $board)
     {
         return $this->getManager()->deleteBoard($board);
     }
@@ -142,10 +142,10 @@ class BoardModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  \Doctrine\Common\Collections\ArrayCollection                    $topics
-     * @param  \CCDNForum\ForumBundle\Entity\Board                             $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                             $board
      * @return \CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface
      */
-    public function reassignTopicsToBoard(ArrayCollection $topics, Board $board = null)
+    public function reassignTopicsToBoard(ArrayCollection $topics, BoardInterface $board = null)
     {
         return $this->getManager()->reassignTopicsToBoard($topics, $board);
     }
@@ -154,11 +154,11 @@ class BoardModel extends BaseModel implements ModelInterface
      *
      * @access public
      * @param  Array                                                           $boards
-     * @param  \CCDNForum\ForumBundle\Entity\Board                             $boardShift
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                             $boardShift
      * @param  int                                                             $direction
      * @return \CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface
      */
-    public function reorderBoards($boards, Board $boardShift, $direction)
+    public function reorderBoards($boards, BoardInterface $boardShift, $direction)
     {
         return $this->getManager()->reorderBoards($boards, $boardShift, $direction);
     }

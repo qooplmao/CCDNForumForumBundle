@@ -16,7 +16,7 @@ namespace CCDNForum\ForumBundle\Component\Dispatcher\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
-use CCDNForum\ForumBundle\Entity\Post;
+use CCDNForum\ForumBundle\Entity\PostInterface;
 
 /**
  *
@@ -49,9 +49,9 @@ class ModeratorPostEvent extends Event
      *
      * @access public
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \CCDNForum\ForumBundle\Entity\Post        $post
+     * @param \CCDNForum\ForumBundle\Entity\PostInterface        $post
      */
-    public function __construct(Request $request, Post $post = null)
+    public function __construct(Request $request, PostInterface $post = null)
     {
         $this->request = $request;
         $this->post = $post;
@@ -70,7 +70,7 @@ class ModeratorPostEvent extends Event
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Post
+     * @return \CCDNForum\ForumBundle\Entity\PostInterface
      */
     public function getPost()
     {

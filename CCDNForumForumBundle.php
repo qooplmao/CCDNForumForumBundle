@@ -13,6 +13,7 @@
 
 namespace CCDNForum\ForumBundle;
 
+use CCDNForum\ForumBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -175,5 +176,17 @@ class CCDNForumForumBundle extends Bundle
                 ),
             )
         ); // End Twig Globals.
+
+        $interfaces = array(
+            'CCDNForum\ForumBundle\Entity\ForumInterface'           => 'ccdn_forum_forum.entity.forum.class',
+            'CCDNForum\ForumBundle\Entity\CategoryInterface'        => 'ccdn_forum_forum.entity.category.class',
+            'CCDNForum\ForumBundle\Entity\BoardInterface'           => 'ccdn_forum_forum.entity.board.class',
+            'CCDNForum\ForumBundle\Entity\TopicInterface'           => 'ccdn_forum_forum.entity.topic.class',
+            'CCDNForum\ForumBundle\Entity\PostInterface'            => 'ccdn_forum_forum.entity.post.class',
+            'CCDNForum\ForumBundle\Entity\SubscriptionInterface'    => 'ccdn_forum_forum.entity.subscription.class',
+            'CCDNForum\ForumBundle\Entity\RegistryInterface'        => 'ccdn_forum_forum.entity.registry.class',
+        );
+
+        $this->container->addCompilerPass(new DoctrineTargetEntitiesResolver('ccdn_forum_forum', $interfaces));
     }
 }

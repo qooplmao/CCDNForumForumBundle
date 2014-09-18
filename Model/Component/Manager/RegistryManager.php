@@ -15,7 +15,7 @@ namespace CCDNForum\ForumBundle\Model\Component\Manager;
 
 use CCDNForum\ForumBundle\Model\Component\Manager\ManagerInterface;
 use CCDNForum\ForumBundle\Model\Component\Manager\BaseManager;
-use CCDNForum\ForumBundle\Entity\Registry;
+use CCDNForum\ForumBundle\Entity\RegistryInterface;
 
 /**
  *
@@ -33,7 +33,7 @@ class RegistryManager extends BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @return \CCDNForum\ForumBundle\Entity\Registry
+     * @return \CCDNForum\ForumBundle\Entity\RegistryInterface
      */
     public function createRegistry()
     {
@@ -43,10 +43,10 @@ class RegistryManager extends BaseManager implements ManagerInterface
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Registry                         $registry
+     * @param  \CCDNForum\ForumBundle\Entity\RegistryInterface                         $registry
      * @return \CCDNForum\ForumBundle\Model\Component\Manager\RegistryManager
      */
-    public function saveRegistry(Registry $registry)
+    public function saveRegistry(RegistryInterface $registry)
     {
         $this->gateway->saveRegistry($registry);
 

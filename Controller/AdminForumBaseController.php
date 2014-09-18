@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Controller;
 
-use CCDNForum\ForumBundle\Entity\Forum;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
 
 /**
  *
@@ -47,7 +47,7 @@ class AdminForumBaseController extends BaseController
      * @access protected
      * @return \CCDNForum\ForumBundle\Form\Handler\ForumUpdateFormHandler
      */
-    protected function getFormHandlerToUpdateForum(Forum $forum)
+    protected function getFormHandlerToUpdateForum(ForumInterface $forum)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.forum_update');
 
@@ -63,7 +63,7 @@ class AdminForumBaseController extends BaseController
      * @access protected
      * @return \CCDNForum\ForumBundle\Form\Handler\ForumDeleteFormHandler
      */
-    protected function getFormHandlerToDeleteForum(Forum $forum)
+    protected function getFormHandlerToDeleteForum(ForumInterface $forum)
     {
         $formHandler = $this->container->get('ccdn_forum_forum.form.handler.forum_delete');
 

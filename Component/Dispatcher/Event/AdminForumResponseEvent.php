@@ -16,7 +16,7 @@ namespace CCDNForum\ForumBundle\Component\Dispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use CCDNForum\ForumBundle\Entity\Forum;
+use CCDNForum\ForumBundle\Entity\ForumInterface;
 
 /**
  *
@@ -43,9 +43,9 @@ class AdminForumResponseEvent extends AdminForumEvent
      * @access public
      * @param \Symfony\Component\HttpFoundation\Request  $request
      * @param \Symfony\Component\HttpFoundation\Response $response
-     * @param \CCDNForum\ForumBundle\Entity\Forum        $forum
+     * @param \CCDNForum\ForumBundle\Entity\ForumInterface        $forum
      */
-    public function __construct(Request $request, Response $response, Forum $forum = null)
+    public function __construct(Request $request, Response $response, ForumInterface $forum = null)
     {
         $this->request = $request;
         $this->response = $response;

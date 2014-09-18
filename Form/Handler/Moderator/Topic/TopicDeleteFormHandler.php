@@ -21,7 +21,7 @@ use CCDNForum\ForumBundle\Component\Dispatcher\ForumEvents;
 use CCDNForum\ForumBundle\Component\Dispatcher\Event\ModeratorTopicEvent;
 use CCDNForum\ForumBundle\Form\Handler\BaseFormHandler;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Topic;
+use CCDNForum\ForumBundle\Entity\TopicInterface;
 
 /**
  *
@@ -53,7 +53,7 @@ class TopicDeleteFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Topic $topic
+     * @var \CCDNForum\ForumBundle\Entity\TopicInterface $topic
      */
     protected $topic;
 
@@ -76,10 +76,10 @@ class TopicDeleteFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Topic                                        $topic
+     * @param  \CCDNForum\ForumBundle\Entity\TopicInterface                                        $topic
      * @return \CCDNForum\ForumBundle\Form\Handler\Moderator\Topic\TopicDeleteFormHandler
      */
-    public function setTopic(Topic $topic)
+    public function setTopic(TopicInterface $topic)
     {
         $this->topic = $topic;
 
@@ -94,7 +94,7 @@ class TopicDeleteFormHandler extends BaseFormHandler
     public function getForm()
     {
         if (null == $this->form) {
-            if (! is_object($this->topic) || ! ($this->topic instanceof Topic)) {
+            if (! is_object($this->topic) || ! ($this->topic instanceof TopicInterface)) {
                 throw new \Exception('Topic must be specified to delete in TopicDeleteFormHandler');
             }
 
@@ -109,9 +109,9 @@ class TopicDeleteFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param \CCDNForum\ForumBundle\Entity\Topic $topic
+     * @param \CCDNForum\ForumBundle\Entity\TopicInterface $topic
      */
-    protected function onSuccess(Topic $topic)
+    protected function onSuccess(TopicInterface $topic)
     {
         $this->dispatcher->dispatch(ForumEvents::MODERATOR_TOPIC_SOFT_DELETE_SUCCESS, new ModeratorTopicEvent($this->request, $this->topic));
 

@@ -21,7 +21,7 @@ use CCDNForum\ForumBundle\Component\Dispatcher\ForumEvents;
 use CCDNForum\ForumBundle\Component\Dispatcher\Event\AdminBoardEvent;
 use CCDNForum\ForumBundle\Form\Handler\BaseFormHandler;
 use CCDNForum\ForumBundle\Model\FrontModel\ModelInterface;
-use CCDNForum\ForumBundle\Entity\Board;
+use CCDNForum\ForumBundle\Entity\BoardInterface;
 
 /**
  *
@@ -53,7 +53,7 @@ class BoardUpdateFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @var \CCDNForum\ForumBundle\Entity\Board $board
+     * @var \CCDNForum\ForumBundle\Entity\BoardInterface $board
      */
     protected $board;
 
@@ -76,10 +76,10 @@ class BoardUpdateFormHandler extends BaseFormHandler
     /**
      *
      * @access public
-     * @param  \CCDNForum\ForumBundle\Entity\Board                                    $board
+     * @param  \CCDNForum\ForumBundle\Entity\BoardInterface                                    $board
      * @return \CCDNForum\ForumBundle\Form\Handler\Admin\Board\BoardUpdateFormHandler
      */
-    public function setBoard(Board $board)
+    public function setBoard(BoardInterface $board)
     {
         $this->board = $board;
 
@@ -94,7 +94,7 @@ class BoardUpdateFormHandler extends BaseFormHandler
     public function getForm()
     {
         if (null == $this->form) {
-            if (!is_object($this->board) && !$this->board instanceof Board) {
+            if (!is_object($this->board) && !$this->board instanceof BoardInterface) {
                 throw new \Exception('Board object must be specified to edit.');
             }
 
@@ -109,9 +109,9 @@ class BoardUpdateFormHandler extends BaseFormHandler
     /**
      *
      * @access protected
-     * @param \CCDNForum\ForumBundle\Entity\Board $board
+     * @param \CCDNForum\ForumBundle\Entity\BoardInterface $board
      */
-    protected function onSuccess(Board $board)
+    protected function onSuccess(BoardInterface $board)
     {
         $this->dispatcher->dispatch(ForumEvents::ADMIN_BOARD_EDIT_SUCCESS, new AdminBoardEvent($this->request, $board));
 
