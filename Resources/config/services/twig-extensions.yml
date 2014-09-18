@@ -22,8 +22,8 @@ services:
         tags:
             - { name: twig.extension }
 
-    ccdn_forum_forum.component.twig_extension.roles:
-        class: %ccdn_forum_forum.component.twig_extension.roles.class%
+    ccdn_forum_forum.component.twig_extension.role:
+        class: %ccdn_forum_forum.component.twig_extension.role.class%
         arguments:
             - @ccdn_forum_forum.component.helper.role_transformer
         tags:
