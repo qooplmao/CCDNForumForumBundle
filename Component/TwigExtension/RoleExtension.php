@@ -12,6 +12,7 @@
  */
 
 namespace CCDNForum\ForumBundle\Component\TwigExtension;
+
 use CCDNForum\ForumBundle\Component\Helper\RoleTransformer;
 
 /**
