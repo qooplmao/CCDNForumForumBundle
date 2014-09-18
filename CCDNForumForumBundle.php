@@ -15,6 +15,7 @@ namespace CCDNForum\ForumBundle;
 
 use CCDNForum\ForumBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  *
@@ -176,7 +177,10 @@ class CCDNForumForumBundle extends Bundle
                 ),
             )
         ); // End Twig Globals.
+    }
 
+    public function build(ContainerBuilder $container)
+    {
         $interfaces = array(
             'CCDNForum\ForumBundle\Entity\ForumInterface'           => 'ccdn_forum_forum.entity.forum.class',
             'CCDNForum\ForumBundle\Entity\CategoryInterface'        => 'ccdn_forum_forum.entity.category.class',
