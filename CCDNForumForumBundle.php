@@ -13,7 +13,7 @@
 
 namespace CCDNForum\ForumBundle;
 
-use CCDNForum\ForumBundle\DependencyInjection\DoctrineTargetEntitiesResolver;
+use CCDNForum\ForumBundle\DependencyInjection\Compiler\ResolveDoctrineTargetEntitiesPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -191,6 +191,6 @@ class CCDNForumForumBundle extends Bundle
             'CCDNForum\ForumBundle\Entity\RegistryInterface'        => 'ccdn_forum_forum.entity.registry.class',
         );
 
-        $container->addCompilerPass(new DoctrineTargetEntitiesResolver('ccdn_forum_forum', $interfaces));
+        $container->addCompilerPass(new ResolveDoctrineTargetEntitiesPass('ccdn_forum_forum', $interfaces));
     }
 }
