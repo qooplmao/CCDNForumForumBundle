@@ -27,7 +27,7 @@ services:
     ccdn_forum_forum.component.helper.role_transformer:
         class: CCDNForum\ForumBundle\Component\Helper\RoleTransformer
         arguments:
-            - %ccdn_forum_forum.roles_transformation%
+            - %ccdn_forum_forum.role_transformation%
 
     #
     # Flood Control.

@@ -89,6 +89,7 @@ class CCDNForumForumExtension extends Extension
         $this->getPostSection($config, $container);
         $this->getItemPostSection($config, $container);
         $this->getSubscriptionSection($config, $container);
+        $this->getRolesSection($config, $container);
 
         // Load Service definitions.
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -329,7 +330,7 @@ class CCDNForumForumExtension extends Extension
      */
     private function getRolesSection(array $config, ContainerBuilder $container)
     {
-        $container->setParameter('ccdn_forum_forum.roles_transformation', $config['roles']);
+        $container->setParameter('ccdn_forum_forum.role_transformation', $config['roles']);
 
         return $this;
     }
