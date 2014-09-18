@@ -887,7 +887,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->canBeUnset()
                                     ->children()
-                                        ->scalarNode('class')->defaultValue('CCDNForum\ForumBundle\Component\TwigExtension\AuthorizerExtension')->end()
+                                        ->scalarNode('class')->defaultValue('CCDNForum\ForumBundle\Component\TwigExtension\RoleTransformer')->end()
                                     ->end()
                                 ->end()
                             ->end()
