@@ -191,6 +191,6 @@ class CCDNForumForumBundle extends Bundle
             'CCDNForum\ForumBundle\Entity\RegistryInterface'        => 'ccdn_forum_forum.entity.registry.class',
         );
 
-        $this->container->addCompilerPass(new DoctrineTargetEntitiesResolver('ccdn_forum_forum', $interfaces));
+        $container->addCompilerPass(new DoctrineTargetEntitiesResolver('ccdn_forum_forum', $interfaces));
     }
 }
