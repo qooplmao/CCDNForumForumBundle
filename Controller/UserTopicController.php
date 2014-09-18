@@ -45,7 +45,7 @@ class UserTopicController extends UserTopicBaseController
         $this->isAuthorised($this->getAuthorizer()->canShowTopic($topic, $forum));
         $postsPager = $this->getPostModel()->findAllPostsPaginatedByTopicId($topicId, $this->getQuery('page', 1), $this->getPageHelper()->getPostsPerPageOnTopics(), true);
 
-        if ($this->isGranted('ROLE_USER')) {
+        if ($this->isGranted($this->getRoleTransformer()->getUserRole())) {
             if ($subscription = $this->getSubscriptionModel()->findOneSubscriptionForTopicByIdAndUserById($topicId, $this->getUser()->getId())) {
                 $this->getSubscriptionModel()->markAsRead($subscription);
             }
@@ -73,7 +73,7 @@ class UserTopicController extends UserTopicBaseController
      */
     public function createAction($forumName, $boardId)
     {
-        $this->isAuthorised('ROLE_USER');
+        $this->isAuthorised($this->getRoleTransformer()->getUserRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumByName($forumName));
         $this->isFound($board = $this->getBoardModel()->findOneBoardByIdWithCategory($boardId));
         $this->isAuthorised($this->getAuthorizer()->canCreateTopicOnBoard($board, $forum));
@@ -101,7 +101,7 @@ class UserTopicController extends UserTopicBaseController
      */
     public function createProcessAction($forumName, $boardId)
     {
-        $this->isAuthorised('ROLE_USER');
+        $this->isAuthorised($this->getRoleTransformer()->getUserRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumByName($forumName));
         $this->isFound($board = $this->getBoardModel()->findOneBoardByIdWithCategory($boardId));
         $this->isAuthorised($this->getAuthorizer()->canCreateTopicOnBoard($board, $forum));
@@ -130,7 +130,7 @@ class UserTopicController extends UserTopicBaseController
      */
     public function replyAction($forumName, $topicId)
     {
-        $this->isAuthorised('ROLE_USER');
+        $this->isAuthorised($this->getRoleTransformer()->getUserRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumByName($forumName));
         $this->isFound($topic = $this->getTopicModel()->findOneTopicByIdWithPosts($topicId, true));
         $this->isAuthorised($this->getAuthorizer()->canReplyToTopic($topic, $forum));
@@ -158,7 +158,7 @@ class UserTopicController extends UserTopicBaseController
      */
     public function replyProcessAction($forumName, $topicId)
     {
-        $this->isAuthorised('ROLE_USER');
+        $this->isAuthorised($this->getRoleTransformer()->getUserRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumByName($forumName));
         $this->isFound($topic = $this->getTopicModel()->findOneTopicByIdWithPosts($topicId, true));
         $this->isAuthorised($this->getAuthorizer()->canReplyToTopic($topic, $forum));

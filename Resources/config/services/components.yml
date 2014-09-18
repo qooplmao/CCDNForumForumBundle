@@ -22,6 +22,12 @@ services:
         arguments:
             - @security.context
             - %security.role_hierarchy.roles%
+            - @ccdn_forum_forum.component.helper.role_transformer
+
+    ccdn_forum_forum.component.helper.role_transformer:
+        class: CCDNForum\ForumBundle\Component\Helper\RoleTransformer
+        arguments:
+            - %ccdn_forum_forum.roles_transformation%
 
     #
     # Flood Control.
@@ -34,6 +40,7 @@ services:
            - %kernel.environment%
            - %ccdn_forum_forum.topic.user.flood_control.post_limit%
            - %ccdn_forum_forum.topic.user.flood_control.block_for_minutes%
+           - @ccdn_forum_forum.component.helper.role_transformer
 
     #
     # Dashboard Integrator.

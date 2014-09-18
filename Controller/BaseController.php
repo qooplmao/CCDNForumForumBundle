@@ -473,4 +473,14 @@ class BaseController extends ContainerAware
     {
         return $this->container->get('ccdn_forum_forum.component.helper.pagination_config');
     }
+
+    /**
+     *
+     * @access protected
+     * @return \CCDNForum\ForumBundle\Component\Helper\RoleTransformer
+     */
+    protected function getRoleTransformer()
+    {
+        return $this->container->get('ccdn_forum_forum.component.helper.role_transformer');
+    }
 }

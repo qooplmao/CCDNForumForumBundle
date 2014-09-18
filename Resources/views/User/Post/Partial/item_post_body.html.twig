@@ -1,6 +1,6 @@
 {%- spaceless -%}
 
-	{%- if post.isDeleted == false or is_granted('ROLE_MODERATOR') -%}
+	{%- if post.isDeleted == false or is_granted(roleModerator()) -%}
 		{%- if post.getEditedDate -%}
 		    <div class="panel panel-default">
 				<div class="panel-heading">
@@ -34,7 +34,7 @@
 		        </abbr>
 			</div>
 
-	        {%- if is_granted('ROLE_MODERATOR') -%}
+	        {%- if is_granted(roleModerator()) -%}
 				<div class="pull-right">
 	                <a class="accordion-toggle" data-toggle="collapse" data-parent="#post_{{- post.getId() -}}" href="#post_{{- post.getId() -}}_body">
 	                    {{- 'post.show' |trans({}, 'CCDNForumForumBundle') -}}
@@ -43,7 +43,7 @@
 			{%- endif -%}
 		</div>
 
-		{%- if is_granted('ROLE_MODERATOR') -%}
+		{%- if is_granted(roleModerator()) -%}
 			<section class="accordion-body collapse" id="post_{{- post.getId() -}}_body">
 				{%- include 'CCDNForumForumBundle:User:Post/Partial/body_content.html.twig' with {'post': post } -%}
 			</section>

@@ -52,23 +52,33 @@ class RoleHelper
 
     /**
      *
+     * @access protected
+     * @var RoleTransformer $roleTransformer
+     */
+    protected $roleTransformer;
+
+    /**
+     *
      * @access public
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      * @param array                                                     $availableRoles
+     * @param RoleTransformer                                           $roleTransformer
      */
-    public function __construct(SecurityContextInterface $securityContext, $availableRoles)
+    public function __construct(SecurityContextInterface $securityContext, $availableRoles, RoleTransformer $roleTransformer)
     {
         $this->securityContext = $securityContext;
 
         // default role is array is empty.
         if (empty($availableRoles)) {
-            $availableRoles[] = 'ROLE_USER';
+            $availableRoles[] = $this->roleTransformer->getUserRole();
         }
 
         $this->availableRoles = $availableRoles;
 
         // Remove the associate arrays.
         $this->availableRoleKeys = array_keys($availableRoles);
+
+        $this->roleTransformer = $roleTransformer;
     }
 
     /**
@@ -167,7 +177,7 @@ class RoleHelper
         if (array_key_exists($usersHighestRoleKey, $roles)) {
             return $roles[$usersHighestRoleKey];
         } else {
-            return 'ROLE_USER';
+            return $this->roleTransformer->getUserRole();
         }
     }
 }

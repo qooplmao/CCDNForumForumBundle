@@ -327,6 +327,20 @@ class CCDNForumForumExtension extends Extension
      * @param  \Symfony\Component\DependencyInjection\ContainerBuilder            $container
      * @return \CCDNForum\ForumBundle\DependencyInjection\CCDNForumForumExtension
      */
+    private function getRolesSection(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('ccdn_forum_forum.roles_transformation', $config['roles']);
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access private
+     * @param  array                                                              $config
+     * @param  \Symfony\Component\DependencyInjection\ContainerBuilder            $container
+     * @return \CCDNForum\ForumBundle\DependencyInjection\CCDNForumForumExtension
+     */
     private function getForumSection(array $config, ContainerBuilder $container)
     {
         $container->setParameter('ccdn_forum_forum.forum.admin.create.layout_template', $config['forum']['admin']['create']['layout_template']);

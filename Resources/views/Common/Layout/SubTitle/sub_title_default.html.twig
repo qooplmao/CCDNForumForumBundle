@@ -23,7 +23,7 @@
 
 		<ul class="dropdown-menu section-indicator" role="menu">
 
-			{%- if is_granted('ROLE_ADMIN') -%}
+			{%- if is_granted(roleAdmin()) -%}
 				<li
 					{%- if route|slice(0,16) == 'ccdn_forum_admin' %} class="selected"{%- endif -%}>
 						<a href="{{- path('ccdn_forum_admin_index') -}}" rel="nofollow">
@@ -39,7 +39,7 @@
 				</a>
 			</li>
 
-			{%- if is_granted('ROLE_USER') -%}
+			{%- if is_granted(roleUser()) -%}
 				<li
 					{%- if route|slice(0,28) == 'ccdn_forum_user_subscription' %} class="selected"{%- endif -%}>
 						{%- if forum is defined and forum is not null -%}

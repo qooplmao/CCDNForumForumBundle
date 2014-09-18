@@ -96,6 +96,8 @@ class Configuration implements ConfigurationInterface
         $this->addFixtureReferenceSection($rootNode);
         $this->addSEOSection($rootNode);
 
+        $this->addRolesSection($rootNode);
+
         return $treeBuilder;
     }
 
@@ -881,6 +883,13 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('class')->defaultValue('CCDNForum\ForumBundle\Component\TwigExtension\AuthorizerExtension')->end()
                                     ->end()
                                 ->end()
+                                ->arrayNode('roles')
+                                    ->addDefaultsIfNotSet()
+                                    ->canBeUnset()
+                                    ->children()
+                                        ->scalarNode('class')->defaultValue('CCDNForum\ForumBundle\Component\TwigExtension\AuthorizerExtension')->end()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
 
@@ -1503,6 +1512,33 @@ class Configuration implements ConfigurationInterface
                     ->canBeUnset()
                     ->children()
                         ->scalarNode('title_length')->defaultValue('67')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @access protected
+     * @param  \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
+     * @return \CCDNForum\ForumBundle\DependencyInjection\Configuration
+     */
+    protected function addRolesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('roles')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('user')->defaultValue('ROLE_USER')->end()
+                        ->scalarNode('moderator')->defaultValue('ROLE_MODERATOR')->end()
+                        ->scalarNode('admin')->defaultValue('ROLE_ADMIN')->end()
+                        ->scalarNode('super_admin')->defaultValue('ROLE_SUPER_ADMIN')->end()
                     ->end()
                 ->end()
             ->end()

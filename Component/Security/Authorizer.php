@@ -13,6 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Component\Security;
 
+use CCDNForum\ForumBundle\Component\Helper\RoleTransformer;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 use CCDNForum\ForumBundle\Component\Helper\PostLockHelper;
@@ -52,14 +53,23 @@ class Authorizer
 
     /**
      *
+     * @access protected
+     * @var \CCDNForum\ForumBundle\Component\Helper\RoleTransformer $roleTransformer
+     */
+    protected $roleTransformer;
+
+    /**
+     *
      * @access public
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      * @param \CCDNForum\ForumBundle\Component\Helper\PostLockHelper    $postLockHelper
+     * @param \CCDNForum\ForumBundle\Component\Helper\RoleTransformer   $roleTransformer
      */
-    public function __construct(SecurityContextInterface $securityContext, PostLockHelper $postLockHelper)
+    public function __construct(SecurityContextInterface $securityContext, PostLockHelper $postLockHelper, RoleTransformer $roleTransformer)
     {
         $this->securityContext = $securityContext;
         $this->postLockHelper = $postLockHelper;
+        $this->roleTransformer = $roleTransformer;
     }
 
     public function canShowForum(Forum $forum)
@@ -114,7 +124,7 @@ class Authorizer
             return false;
         }
 
-        if (! $this->securityContext->isGranted('ROLE_USER')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
         }
 
@@ -131,7 +141,7 @@ class Authorizer
             return false;
         }
 
-        if (! $this->securityContext->isGranted('ROLE_USER')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
         }
 
@@ -151,7 +161,7 @@ class Authorizer
         }
 
         if ($topic->isDeleted()) {
-            if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+            if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
                 return false;
             }
         }
@@ -186,11 +196,11 @@ class Authorizer
             return false;
         }
 
-        if (! $this->canShowTopic($topic, $forum) && ! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->canShowTopic($topic, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             return false;
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -203,11 +213,11 @@ class Authorizer
             return false;
         }
 
-        if (! $this->canShowTopic($topic, $forum) && ! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->canShowTopic($topic, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             return false;
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -221,12 +231,12 @@ class Authorizer
         }
 
         if (! $this->canShowTopic($topic, $forum)) {
-            if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+            if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -240,12 +250,12 @@ class Authorizer
         }
 
         if (! $this->canShowTopic($topic, $forum)) {
-            if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+            if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -255,12 +265,12 @@ class Authorizer
     public function canTopicChangeBoard(Topic $topic, Forum $forum = null)
     {
         if (! $this->canShowTopic($topic, $forum)) {
-            if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+            if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -269,13 +279,13 @@ class Authorizer
 
     public function canStickyTopic(Topic $topic, Forum $forum = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             if (! $this->canShowTopic($topic, $forum)) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -288,13 +298,13 @@ class Authorizer
 
     public function canUnstickyTopic(Topic $topic, Forum $forum = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             if (! $this->canShowTopic($topic, $forum)) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -313,7 +323,7 @@ class Authorizer
             }
         }
 
-        if ($post->isDeleted() && ! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if ($post->isDeleted() && ! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -322,21 +332,21 @@ class Authorizer
 
     public function canEditPost(Post $post, Forum $forum = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_USER')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
         }
 
-        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             return false;
         }
 
         if ($this->postLockHelper->isLocked($post)) {
-            if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+            if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             if (! $post->getCreatedBy()) {
                 return false;
             } else {
@@ -355,21 +365,21 @@ class Authorizer
             return false;
         }
 
-        if (! $this->securityContext->isGranted('ROLE_USER')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
         }
 
-        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
         if ($post->isLocked()) {
-            if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+            if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
                 return false;
             }
         }
 
-        if (! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             if (! $post->getCreatedBy()) {
                 return false;
             } else {
@@ -384,7 +394,7 @@ class Authorizer
 
     public function canRestorePost(Post $post, Forum $forum = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -392,7 +402,7 @@ class Authorizer
             return false;
         }
 
-        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
@@ -401,11 +411,11 @@ class Authorizer
 
     public function canLockPost(Post $post, Forum $forum = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
-        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             return false;
         }
 
@@ -418,11 +428,11 @@ class Authorizer
 
     public function canUnlockPost(Post $post, Forum $forum = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole())) {
             return false;
         }
 
-        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted('ROLE_ADMIN')) {
+        if (! $this->canShowPost($post, $forum) && ! $this->securityContext->isGranted($this->roleTransformer->getAdminRole())) {
             return false;
         }
 
@@ -435,7 +445,7 @@ class Authorizer
 
     public function canSubscribeToTopic(Topic $topic, Forum $forum = null, Subscription $subscription = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_USER')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
         }
 
@@ -460,7 +470,7 @@ class Authorizer
 
     public function canUnsubscribeFromTopic(Topic $topic, Forum $forum = null, Subscription $subscription = null)
     {
-        if (! $this->securityContext->isGranted('ROLE_USER')) {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getUserRole())) {
             return false;
         }
 

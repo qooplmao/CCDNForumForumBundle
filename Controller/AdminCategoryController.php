@@ -37,7 +37,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function listAction()
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $forumFilter = $this->getQuery('forum_filter', null);
         $forums = $this->getForumModel()->findAllForums();
         $categories = $this->getCategoryModel()->findAllCategoriesForForumById($forumFilter);
@@ -58,7 +58,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function createAction()
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $forumFilter = $this->getQuery('forum_filter', null);
         $formHandler = $this->getFormHandlerToCreateCategory($forumFilter);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Category/create.html.', array(
@@ -79,7 +79,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function createProcessAction()
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $forumFilter = $this->getQuery('forum_filter', null);
         $formHandler = $this->getFormHandlerToCreateCategory($forumFilter);
 
@@ -105,7 +105,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function editAction($categoryId)
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $this->isFound($category = $this->getCategoryModel()->findOneCategoryById($categoryId));
         $formHandler = $this->getFormHandlerToUpdateCategory($category);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Category/edit.html.', array(
@@ -127,7 +127,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function editProcessAction($categoryId)
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $this->isFound($category = $this->getCategoryModel()->findOneCategoryById($categoryId));
         $formHandler = $this->getFormHandlerToUpdateCategory($category);
 
@@ -154,7 +154,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function deleteAction($categoryId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($category = $this->getCategoryModel()->findOneCategoryById($categoryId));
         $formHandler = $this->getFormHandlerToDeleteCategory($category);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Category/delete.html.', array(
@@ -176,7 +176,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function deleteProcessAction($categoryId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($category = $this->getCategoryModel()->findOneCategoryById($categoryId));
         $formHandler = $this->getFormHandlerToDeleteCategory($category);
 
@@ -203,7 +203,7 @@ class AdminCategoryController extends AdminCategoryBaseController
      */
     public function reorderAction($categoryId, $direction)
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $this->isFound($category = $this->getCategoryModel()->findOneCategoryById($categoryId));
         $this->dispatch(ForumEvents::ADMIN_CATEGORY_REORDER_INITIALISE, new AdminCategoryEvent($this->getRequest(), $category));
         $params = array();

@@ -13,6 +13,7 @@
 
 namespace CCDNForum\ForumBundle\Component;
 
+use CCDNForum\ForumBundle\Component\Helper\RoleTransformer;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -66,14 +67,30 @@ class FloodControl
 
     /**
      *
+     *
+     * @access protected
+     * @var RoleTransformer $roleTransformer
+     */
+    protected $roleTransformer;
+
+    /**
+     *
      * @access public
      * @param \Symfony\Component\Security\Core\SecurityContextInterface $securityContext
      * @param \Symfony\Component\HttpFoundation\Session\Session         $session
      * @param string                                                    $kernelEnv
      * @param int                                                       $postLimit
      * @param int                                                       $blockTimeInMinutes
+     * @param RoleTransformer                                           $roleTransformer
      */
-    public function __construct(SecurityContextInterface $securityContext, Session $session, $kernelEnv, $postLimit, $blockTimeInMinutes)
+    public function __construct(
+        SecurityContextInterface $securityContext,
+        Session $session,
+        $kernelEnv,
+        $postLimit,
+        $blockTimeInMinutes,
+        RoleTransformer $roleTransformer
+    )
     {
         $this->securityContext = $securityContext;
         $this->session = $session;
@@ -85,6 +102,7 @@ class FloodControl
 
         $this->postLimit = $postLimit;
         $this->blockTimeInMinutes = $blockTimeInMinutes;
+        $this->roleTransformer = $roleTransformer;
     }
 
     /**
@@ -93,7 +111,7 @@ class FloodControl
      */
     public function incrementCounter()
     {
-        if (! $this->securityContext->isGranted('ROLE_MODERATOR') || $this->kernelEnv != 'prod') {
+        if (! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole()) || $this->kernelEnv != 'prod') {
             $postCount = $this->session->get('flood_control_forum_post_count');
 
             $postCount[] = new \DateTime('now');
@@ -109,7 +127,7 @@ class FloodControl
      */
     public function isFlooded()
     {
-        if ($this->postLimit < 1 || ! $this->securityContext->isGranted('ROLE_MODERATOR') || $this->kernelEnv != 'prod') {
+        if ($this->postLimit < 1 || ! $this->securityContext->isGranted($this->roleTransformer->getModeratorRole()) || $this->kernelEnv != 'prod') {
             return false;
         }
 

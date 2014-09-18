@@ -36,7 +36,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function listAction()
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $forums = $this->getForumModel()->findAllForums();
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Forum/list.html.', array(
             'crumbs' => $this->getCrumbs()->addAdminManageForumsIndex(),
@@ -53,7 +53,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function createAction()
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $formHandler = $this->getFormHandlerToCreateForum();
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Forum/create.html.', array(
             'crumbs' => $this->getCrumbs()->addAdminManageForumsCreate(),
@@ -72,7 +72,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function createProcessAction()
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $formHandler = $this->getFormHandlerToCreateForum();
 
         if ($formHandler->process()) {
@@ -96,7 +96,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function editAction($forumId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumById($forumId));
         $formHandler = $this->getFormHandlerToUpdateForum($forum);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Forum/edit.html.', array(
@@ -117,7 +117,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function editProcessAction($forumId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumById($forumId));
         $formHandler = $this->getFormHandlerToUpdateForum($forum);
 
@@ -143,7 +143,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function deleteAction($forumId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumById($forumId));
         $formHandler = $this->getFormHandlerToDeleteForum($forum);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Forum/delete.html.', array(
@@ -164,7 +164,7 @@ class AdminForumController extends AdminForumBaseController
      */
     public function deleteProcessAction($forumId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($forum = $this->getForumModel()->findOneForumById($forumId));
         $formHandler = $this->getFormHandlerToDeleteForum($forum);
 

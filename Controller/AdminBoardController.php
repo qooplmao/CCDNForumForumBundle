@@ -37,7 +37,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function listAction()
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $filters = $this->getNormalisedCategoryAndForumFilters();
 
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/list.html.', array(
@@ -59,7 +59,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function createAction()
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $categoryFilter = $this->getQuery('category_filter', null);
         $formHandler = $this->getFormHandlerToCreateBoard($categoryFilter);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/create.html.', array(
@@ -80,7 +80,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function createProcessAction()
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $categoryFilter = $this->getQuery('category_filter', null);
         $formHandler = $this->getFormHandlerToCreateBoard($categoryFilter);
 
@@ -106,7 +106,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function editAction($boardId)
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $this->isFound($board = $this->getBoardModel()->findOneBoardById($boardId));
         $formHandler = $this->getFormHandlerToUpdateBoard($board);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/edit.html.', array(
@@ -128,7 +128,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function editProcessAction($boardId)
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $this->isFound($board = $this->getBoardModel()->findOneBoardById($boardId));
         $formHandler = $this->getFormHandlerToUpdateBoard($board);
 
@@ -155,7 +155,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function deleteAction($boardId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($board = $this->getBoardModel()->findOneBoardById($boardId));
         $formHandler = $this->getFormHandlerToDeleteBoard($board);
         $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/delete.html.', array(
@@ -177,7 +177,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function deleteProcessAction($boardId)
     {
-        $this->isAuthorised('ROLE_SUPER_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getSuperAdminRole());
         $this->isFound($board = $this->getBoardModel()->findOneBoardById($boardId));
         $formHandler = $this->getFormHandlerToDeleteBoard($board);
 
@@ -204,7 +204,7 @@ class AdminBoardController extends AdminBoardBaseController
      */
     public function reorderAction($boardId, $direction)
     {
-        $this->isAuthorised('ROLE_ADMIN');
+        $this->isAuthorised($this->getRoleTransformer()->getAdminRole());
         $this->isFound($board = $this->getBoardModel()->findOneBoardById($boardId));
         $this->dispatch(ForumEvents::ADMIN_BOARD_REORDER_INITIALISE, new AdminBoardEvent($this->getRequest(), $board));
         $params = array();
