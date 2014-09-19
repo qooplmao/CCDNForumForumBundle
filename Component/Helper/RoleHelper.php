@@ -73,10 +73,14 @@ class RoleHelper
             $availableRoles[] = $this->roleTransformer->getUserRole();
         }
 
-        $this->availableRoles = $availableRoles;
+        $this->availableRoles = array(
+            $roleTransformer->getUserRole()       => 'User',
+            $roleTransformer->getModeratorRole()  => 'Moderator',
+            $roleTransformer->getAdminRole()      => 'Admin',
+            $roleTransformer->getSuperAdminRole() => 'Super Admin',
+        );
 
-        // Remove the associate arrays.
-        $this->availableRoleKeys = array_keys($availableRoles);
+        $this->availableRoleKeys = array_keys($this->availableRoles);
 
         $this->roleTransformer = $roleTransformer;
     }
@@ -88,14 +92,7 @@ class RoleHelper
      */
     public function getRoleHierarchy()
     {
-        $roles = array();
-
-        foreach ($this->availableRoles as $roleName => $roleSubs) {
-            $subs = '<ul><li>' . implode('</li><li>', $roleSubs) . '</li></ul>';
-            $roles[$roleName] = '<strong>' . $roleName . '</strong>' . ($subs != '<ul><li>' . $roleName . '</li></ul>' ? "\n" . $subs:'');
-        }
-
-        return $roles;
+        return $this->availableRoles;
     }
 
     /**
