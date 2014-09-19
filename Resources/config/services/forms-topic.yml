@@ -11,6 +11,7 @@ services:
         class: %ccdn_forum_forum.form.type.topic_create.class%
         arguments:
             - %ccdn_forum_forum.entity.topic.class%
+            - %ccdn_forum_forum.entity.board.class%
 
     ccdn_forum_forum.form.handler.topic_create:
         class: %ccdn_forum_forum.form.handler.topic_create.class%

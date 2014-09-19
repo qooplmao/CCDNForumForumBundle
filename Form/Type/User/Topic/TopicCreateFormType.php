@@ -39,12 +39,21 @@ class TopicCreateFormType extends AbstractType
 
     /**
      *
+     * @access protected
+     * @var string $boardClass
+     */
+    protected $boardClass;
+
+    /**
+     *
      * @access public
      * @var string $topicClass
+     * @var string $boardClass
      */
-    public function __construct($topicClass)
+    public function __construct($topicClass, $boardClass)
     {
         $this->topicClass = $topicClass;
+        $this->boardClass = $boardClass;
     }
 
     /**
@@ -58,7 +67,7 @@ class TopicCreateFormType extends AbstractType
             ->add('board', 'entity',
                 array(
                     'property'           => 'name',
-                    'class'              => 'CCDNForumForumBundle:Board',
+                    'class'              => $this->boardClass,
                     'choices'            => $options['boards'],
                     'label'              => 'board.label',
                     'translation_domain' => 'CCDNForumForumBundle',
