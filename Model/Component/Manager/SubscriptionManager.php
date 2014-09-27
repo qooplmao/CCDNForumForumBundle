@@ -56,7 +56,7 @@ class SubscriptionManager extends BaseManager implements ManagerInterface
         $subscription = $this->model->findOneSubscriptionForTopicByIdAndUserById($topic->getId(), $user->getId());
 
         if (! $subscription) {
-            $subscription = new Subscription();
+            $subscription = $this->createSubscription();
         }
 
         if (! $subscription->isSubscribed()) {
