@@ -85,7 +85,7 @@ class AdminBoardController extends AdminBoardBaseController
         $formHandler = $this->getFormHandlerToCreateBoard($categoryFilter);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_admin_board_list', $this->getFilterQueryStrings($formHandler->getForm()->getData())));
+            $response = $this->redirectResponse('ccdn_forum_admin_board_list', $this->getFilterQueryStrings($formHandler->getForm()->getData()));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/create.html.', array(
                 'crumbs' => $this->getCrumbs()->addAdminManageBoardsCreate(),
@@ -133,7 +133,7 @@ class AdminBoardController extends AdminBoardBaseController
         $formHandler = $this->getFormHandlerToUpdateBoard($board);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_admin_board_list', $this->getFilterQueryStrings($formHandler->getForm()->getData())));
+            $response = $this->redirectResponse('ccdn_forum_admin_board_list', $this->getFilterQueryStrings($formHandler->getForm()->getData()));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/edit.html.', array(
                 'crumbs' => $this->getCrumbs()->addAdminManageBoardsEdit($board),
@@ -182,7 +182,7 @@ class AdminBoardController extends AdminBoardBaseController
         $formHandler = $this->getFormHandlerToDeleteBoard($board);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_admin_board_list', $this->getFilterQueryStrings($formHandler->getForm()->getData())));
+            $response = $this->redirectResponse('ccdn_forum_admin_board_list', $this->getFilterQueryStrings($formHandler->getForm()->getData()));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Board/delete.html.', array(
                 'crumbs' => $this->getCrumbs()->addAdminManageBoardsIndex($board),
@@ -217,7 +217,7 @@ class AdminBoardController extends AdminBoardBaseController
             $this->getBoardModel()->reorderBoards($this->getBoardModel()->findAllBoardsForCategoryById($params['category_filter']), $board, $direction);
             $this->dispatch(ForumEvents::ADMIN_BOARD_REORDER_COMPLETE, new AdminBoardEvent($this->getRequest(), $board));
         }
-        $response = $this->redirectResponse($this->path('ccdn_forum_admin_board_list', $params));
+        $response = $this->redirectResponse('ccdn_forum_admin_board_list', $params);
         $this->dispatch(ForumEvents::ADMIN_BOARD_REORDER_RESPONSE, new AdminBoardResponseEvent($this->getRequest(), $response, $board));
 
         return $response;

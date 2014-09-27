@@ -49,10 +49,10 @@ class ModeratorPostController extends ModeratorPostBaseController
         $this->getPostModel()->lock($post);
         $this->dispatch(ForumEvents::MODERATOR_POST_LOCK_COMPLETE, new ModeratorPostEvent($this->getRequest(), $post));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $post->getTopic()->getId()
-        )));
+        ));
     }
 
     /**
@@ -130,9 +130,9 @@ class ModeratorPostController extends ModeratorPostBaseController
         $this->getPostModel()->restore($post)->flush();
         $this->dispatch(ForumEvents::MODERATOR_POST_RESTORE_COMPLETE, new ModeratorPostEvent($this->getRequest(), $post));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $post->getTopic()->getId()
-        )));
+        ));
     }
 }

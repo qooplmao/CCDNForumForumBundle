@@ -48,10 +48,10 @@ class ModeratorTopicController extends ModeratorTopicBaseController
         $this->getTopicModel()->sticky($topic, $this->getUser());
         $this->dispatch(ForumEvents::MODERATOR_TOPIC_UNSTICKY_COMPLETE, new ModeratorTopicEvent($this->getRequest(), $topic));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topic->getId()
-        )));
+        ));
     }
 
     /**
@@ -70,10 +70,10 @@ class ModeratorTopicController extends ModeratorTopicBaseController
         $this->getTopicModel()->unsticky($topic);
         $this->dispatch(ForumEvents::MODERATOR_TOPIC_UNSTICKY_COMPLETE, new ModeratorTopicEvent($this->getRequest(), $topic));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topic->getId()
-        )));
+        ));
     }
 
     /**
@@ -94,10 +94,10 @@ class ModeratorTopicController extends ModeratorTopicBaseController
         $this->getTopicModel()->close($topic, $this->getUser())->flush();
         $this->dispatch(ForumEvents::MODERATOR_TOPIC_CLOSE_COMPLETE, new ModeratorTopicEvent($this->getRequest(), $topic));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topic->getId()
-        )));
+        ));
     }
 
     /**
@@ -116,10 +116,10 @@ class ModeratorTopicController extends ModeratorTopicBaseController
         $this->getTopicModel()->reopen($topic)->flush();
         $this->dispatch(ForumEvents::MODERATOR_TOPIC_REOPEN_COMPLETE, new ModeratorTopicEvent($this->getRequest(), $topic));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topic->getId()
-        )));
+        ));
     }
 
     /**
@@ -195,10 +195,10 @@ class ModeratorTopicController extends ModeratorTopicBaseController
         $this->getTopicModel()->restore($topic)->flush();
         $this->dispatch(ForumEvents::MODERATOR_TOPIC_RESTORE_COMPLETE, new ModeratorTopicEvent($this->getRequest(), $topic));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topic->getId()
-        )));
+        ));
     }
 
     /**
@@ -243,7 +243,7 @@ class ModeratorTopicController extends ModeratorTopicBaseController
         $formHandler = $this->getFormHandlerToChangeBoardOnTopic($forum, $topic);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array('forumName' => $forumName, 'topicId' => $topic->getId() )));
+            $response = $this->redirectResponse('ccdn_forum_user_topic_show', array('forumName' => $forumName, 'topicId' => $topic->getId() ));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Moderator:Topic/change_board.html.', array(
                 'crumbs' => $this->getCrumbs()->addModeratorTopicChangeBoard($forum, $topic),

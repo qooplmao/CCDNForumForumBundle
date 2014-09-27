@@ -84,7 +84,7 @@ class AdminCategoryController extends AdminCategoryBaseController
         $formHandler = $this->getFormHandlerToCreateCategory($forumFilter);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_admin_category_list', $this->getFilterQueryStrings($formHandler->getForm()->getData())));
+            $response = $this->redirectResponse('ccdn_forum_admin_category_list', $this->getFilterQueryStrings($formHandler->getForm()->getData()));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Category/create.html.', array(
                 'crumbs' => $this->getCrumbs()->addAdminManageCategoriesCreate(),
@@ -132,7 +132,7 @@ class AdminCategoryController extends AdminCategoryBaseController
         $formHandler = $this->getFormHandlerToUpdateCategory($category);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_admin_category_list', $this->getFilterQueryStrings($formHandler->getForm()->getData())));
+            $response = $this->redirectResponse('ccdn_forum_admin_category_list', $this->getFilterQueryStrings($formHandler->getForm()->getData()));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Category/edit.html.', array(
                 'crumbs' => $this->getCrumbs()->addAdminManageCategoriesEdit($category),
@@ -181,7 +181,7 @@ class AdminCategoryController extends AdminCategoryBaseController
         $formHandler = $this->getFormHandlerToDeleteCategory($category);
 
         if ($formHandler->process()) {
-            $response = $this->redirectResponse($this->path('ccdn_forum_admin_category_list', $this->getFilterQueryStrings($formHandler->getForm()->getData())));
+            $response = $this->redirectResponse('ccdn_forum_admin_category_list', $this->getFilterQueryStrings($formHandler->getForm()->getData()));
         } else {
             $response = $this->renderResponse('CCDNForumForumBundle:Admin:/Category/delete.html.', array(
                 'crumbs' => $this->getCrumbs()->addAdminManageCategoriesDelete($category),
@@ -216,7 +216,7 @@ class AdminCategoryController extends AdminCategoryBaseController
             $this->dispatch(ForumEvents::ADMIN_CATEGORY_REORDER_COMPLETE, new AdminCategoryEvent($this->getRequest(), $category));
         }
 
-        $response = $this->redirectResponse($this->path('ccdn_forum_admin_category_list', $params));
+        $response = $this->redirectResponse('ccdn_forum_admin_category_list', $params);
         $this->dispatch(ForumEvents::ADMIN_CATEGORY_REORDER_RESPONSE, new AdminCategoryResponseEvent($this->getRequest(), $response, $category));
 
         return $response;

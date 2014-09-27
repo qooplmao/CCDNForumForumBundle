@@ -214,11 +214,16 @@ class BaseController extends ContainerAware
     /**
      *
      * @access protected
-     * @param  string                                             $url
+     * @param  string                                             $route
+     * @param  array                                              $parameters
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function redirectResponse($url)
+    protected function redirectResponse($defaultRoute, array $parameters = array())
     {
+        $route = $this->getRequest()->get('redirect', $defaultRoute);
+
+        $url = $this->path($route, $parameters);
+
         return new RedirectResponse($url);
     }
 
@@ -233,11 +238,11 @@ class BaseController extends ContainerAware
     protected function redirectResponseForTopicOnPageFromPost($forumName, TopicInterface $topic, PostInterface $post)
     {
         //$page = $this->getTopicModel()->getPageForPostOnTopic($topic, $topic->getLastPost()); // Page of the last post.
-        $response = $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        $response = $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topic->getId(),
             /*'page' => $page*/
-        )) /* . '#' . $topic->getLastPost()->getId()*/);
+        ) /* . '#' . $topic->getLastPost()->getId()*/);
 
         return $response;
     }

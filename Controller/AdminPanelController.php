@@ -33,6 +33,6 @@ class AdminPanelController extends BaseController
      */
     public function indexAction()
     {
-        return $this->redirectResponse($this->path('ccdn_forum_admin_forum_list'));
+        return $this->redirectResponse('ccdn_forum_admin_forum_list');
     }
 }

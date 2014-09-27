@@ -136,10 +136,10 @@ class UserSubscriptionController extends BaseController
         $this->getSubscriptionModel()->subscribe($topic, $this->getUser())->flush();
         $this->dispatch(ForumEvents::USER_TOPIC_SUBSCRIBE_COMPLETE, new UserTopicEvent($this->getRequest(), $topic, true));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topicId
-        )));
+        ));
     }
 
     /**
@@ -165,9 +165,9 @@ class UserSubscriptionController extends BaseController
         $this->getSubscriptionModel()->unsubscribe($topic, $this->getUser()->getId())->flush();
         $this->dispatch(ForumEvents::USER_TOPIC_UNSUBSCRIBE_COMPLETE, new UserTopicEvent($this->getRequest(), $topic, false));
 
-        return $this->redirectResponse($this->path('ccdn_forum_user_topic_show', array(
+        return $this->redirectResponse('ccdn_forum_user_topic_show', array(
             'forumName' => $forumName,
             'topicId' => $topicId
-        )));
+        ));
     }
 }
