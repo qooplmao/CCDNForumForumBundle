@@ -199,14 +199,16 @@ class BaseController extends ContainerAware
     /**
      *
      * @access protected
-     * @param  string $template
+     * @param  string $defaultTemplate
      * @param  Array  $params
      * @param  string $engine
      * @return string
      */
-    protected function renderResponse($template, $params = array(), $engine = null)
+    protected function renderResponse($defaultTemplate, $params = array(), $engine = null)
     {
-        return $this->getTemplating()->renderResponse($template . ($engine ?: $this->getEngine()), $params);
+        $template = $this->getRequest()->get('_template', $defaultTemplate . ($engine ?: $this->getEngine()));
+
+        return $this->getTemplating()->renderResponse($template, $params);
     }
 
     /**
